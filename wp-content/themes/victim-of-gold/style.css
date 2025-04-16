@@ -31,6 +31,7 @@ body {
     top: 0;
     left: 0;
     z-index: 1000;
+    transition: transform 0.3s ease-in-out;
 }
 
 .top-bar-content {
@@ -47,6 +48,7 @@ body {
     align-items: center;
     width: 100%;
     justify-content: space-between;
+    gap: 20px;
 }
 
 .logo-container {
@@ -97,27 +99,9 @@ nav.menu {
     color: #957B4D;
 }
 
+/* Temporairement caché - À réactiver plus tard */
 .language-selector {
-    flex: 0 0 141px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 6px;
-    align-items: center;
-}
-
-.language-selector a,
-.language-selector span {
-    color: #FFFFFF;
-    text-decoration: none;
-    font-family: 'Priori Serif OT', serif;
-    font-size: 18px;
-    line-height: 1em;
-}
-
-.language-selector a.active {
-    color: #957B4D;
-    font-family: 'PrioriSerBold', serif;
-    font-weight: 700;
+    display: none !important;
 }
 
 /* Hamburger Menu */
@@ -172,17 +156,72 @@ nav.menu {
 }
 
 /* Responsive Styles */
-@media (max-width: 1200px) {
-    .top-bar-content {
-        padding: 0 30px;
+@media (max-width: 1440px) {
+    .news-alternating-content {
+        width: 45%;
+        padding: 80px 40px;
     }
+    .news-alternating-image {
+        width: 55%;
+        height: 600px;
+    }
+}
 
+@media (max-width: 1136px) {
+    .news-alternating-content {
+        width: 50%;
+        padding: 60px 30px;
+        min-height: 350px;
+    }
+    .news-alternating-image {
+        width: 50%;
+        height: 500px;
+    }
+    .news-alternating-title {
+        font-size: 26px;
+        line-height: 32px;
+        margin-bottom: 15px;
+    }
+    .news-alternating-excerpt {
+        font-size: 13px;
+        line-height: 16px;
+        margin-bottom: 25px;
+    }
+    .news-alternating-item.reverse .news-alternating-content {
+        padding-left: 30px;
+        padding-right: 60px;
+    }
+}
+
+@media (max-width: 1200px) {
     .menu {
         gap: 30px;
     }
 }
 
+@media (max-width: 1079px) {
+    .menu {
+        gap: 20px;
+    }
+
+    .menu a {
+        font-size: 16px;
+    }
+
+    .top-bar-content {
+        padding: 0 40px;
+    }
+
+    .logo-container {
+        flex: 0 0 130px;
+    }
+}
+
 @media (max-width: 1024px) {
+    .top-bar-content {
+        padding: 0 30px;
+    }
+
     body.menu-open {
         overflow: hidden;
         position: fixed;
@@ -247,6 +286,8 @@ nav.menu {
     .menu li:nth-child(4) { transition-delay: 0.4s; }
     .menu li:nth-child(5) { transition-delay: 0.5s; }
     .menu li:nth-child(6) { transition-delay: 0.6s; }
+    .menu li:nth-child(7) { transition-delay: 0.7s; }
+    .menu li:last-child { transition-delay: 0.8s; }
 
     .menu a {
         font-size: 24px;
@@ -286,21 +327,234 @@ nav.menu {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 992px) {
+    .news-alternating-item {
+        flex-direction: column !important;
+        align-items: stretch;
+    }
+    .news-alternating-image,
+    .news-alternating-content {
+        width: 100% !important;
+    }
+    .news-alternating-image {
+        height: 300px;
+    }
+    .news-alternating-content {
+        padding: 40px 20px;
+        min-height: unset;
+        height: auto;
+    }
+    .news-alternating-item.reverse .news-alternating-content {
+        padding: 40px 20px;
+    }
+    .news-alternating-title {
+        font-size: 24px;
+        line-height: 29px;
+        margin-bottom: 15px;
+    }
+    .news-alternating-excerpt {
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
     .top-bar-content {
         padding: 0 20px;
     }
 
+    .logo-container {
+        flex: 0 0 120px;
+    }
+
     .custom-logo {
-        height: 28px;
-        width: auto;
+        height: 36px;
+    }
+
+    /* Hero Section Mobile */
+    .hero {
+        height: 100vh;
+        padding: 0 20px;
+    }
+
+    .hero-text {
+        transform: scale(0.8);
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* News Section Mobile */
+    .news-alternating-list {
+        gap: 60px;
+        padding: 40px 0;
+    }
+
+    .news-alternating-item {
+        flex-direction: column;
+        gap: 30px;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .news-alternating-item:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .news-alternating-item:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    .news-alternating-image {
+        width: 100%;
+        height: 400px;
+        transform: scale(1.05);
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .news-alternating-image:hover {
+        transform: scale(1);
+    }
+
+    .news-alternating-content {
+        width: 100%;
+        padding: 0 20px;
+        min-height: auto;
+    }
+
+    .news-alternating-title {
+        font-size: 28px;
+        line-height: 1.3;
+        margin-bottom: 15px;
+    }
+
+    .news-alternating-excerpt {
+        font-size: 15px;
+        line-height: 1.5;
+        margin-bottom: 25px;
+    }
+
+    .news-alternating-btn {
+        font-size: 16px;
+        padding: 12px 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .news-alternating-btn::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background: #957B4D;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .news-alternating-btn:hover::before {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    /* Horaires Section Mobile Redesign */
+    .horaires-section {
+        padding: 40px 0;
+        background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(149,123,77,0.02) 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .horaires-container {
+        padding: 0;
+        position: relative;
+    }
+
+    .horaires-list {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+        padding: 25px 20px;
+        background: rgba(0,0,0,0.2);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 2px;
+        position: relative;
+    }
+
+    .horaire-item {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(149,123,77,0.08);
+        transition: all 0.3s ease;
+        position: relative;
+        gap: 12px;
+    }
+
+    .horaire-item:last-child {
+        border-bottom: none;
+    }
+
+    .jour {
+        font-family: 'Priori Serif OT', serif;
+        font-size: 15px;
+        color: #957B4D;
+        margin: 0;
+        letter-spacing: 0.08em;
+        font-weight: 400;
+    }
+
+    .heures {
+        font-family: 'Verdana', sans-serif;
+        font-size: 14px;
+        color: rgba(255,255,255,0.9);
+        letter-spacing: 0.1em;
+        font-weight: 300;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    .horaire-item.today {
+        background: transparent;
+        padding: 12px 0;
+    }
+
+    .horaire-item.today .jour {
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .horaire-item.today .heures {
+        color: #957B4D;
+        font-weight: 400;
+    }
+}
+
+@media (max-width: 480px) {
+    .top-bar-content {
+        padding: 0 15px;
+    }
+
+    .logo-container {
+        flex: 0 0 100px;
+    }
+
+    .custom-logo {
+        height: 32px;
     }
 
     .language-selector {
         font-size: 16px;
     }
 
-    .menu {
+    nav.menu {
         padding: 80px 20px 30px;
     }
 
@@ -312,6 +566,102 @@ nav.menu {
     .hamburger {
         width: 25px;
         height: 18px;
+    }
+
+    .news-alternating-list {
+        gap: 0;
+    }
+    .news-alternating-image {
+        height: 250px;
+    }
+    .news-alternating-content {
+        padding: 30px 15px;
+    }
+    .news-alternating-item.reverse .news-alternating-content {
+        padding: 30px 15px;
+    }
+    .news-alternating-title {
+        font-size: 20px;
+        line-height: 24px;
+        margin-bottom: 12px;
+    }
+    .news-alternating-meta {
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+    .news-alternating-excerpt {
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 20px;
+    }
+    .news-alternating-btn {
+        font-size: 14px;
+        padding-bottom: 2px;
+    }
+
+    .news-alternating-image {
+        height: 300px;
+    }
+
+    .news-alternating-excerpt {
+        font-size: 14px;
+    }
+
+    .adresse {
+        font-size: 18px;
+    }
+
+    .horaires-section {
+        padding: 30px 0;
+    }
+
+    .adresse-container {
+        padding: 0 20px 30px;
+    }
+
+    .horaires-list {
+        max-width: 100%;
+        margin: 0 20px;
+        padding: 20px 15px;
+    }
+
+    .horaire-item {
+        padding: 10px 0;
+        gap: 25px;
+    }
+
+    .jour {
+        font-size: 14px;
+    }
+
+    .heures {
+        font-size: 13px;
+        min-width: 85px;
+    }
+
+    .horaire-item.today {
+        padding: 14px 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    .horaires-list {
+        margin: 0 15px;
+        padding: 15px 12px;
+    }
+
+    .horaire-item {
+        padding: 8px 0;
+        gap: 20px;
+    }
+
+    .jour {
+        font-size: 13px;
+    }
+
+    .heures {
+        font-size: 12px;
+        min-width: 80px;
     }
 }
 
@@ -331,51 +681,21 @@ nav.menu {
     height: auto;
 }
 
-.hero-text path {
-    fill: none;
-    stroke: #957B4D;
-    stroke-width: 1;
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: drawPath 2s ease forwards;
-    transition: fill 1s cubic-bezier(.4,0,.2,1);
-}
-.hero-text svg.filled path {
-    fill: #fff !important;
-    transition: fill 1s cubic-bezier(.4,0,.2,1);
-}
-
-@keyframes drawPath {
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-/* Styles pour l'animation SVG */
 .hero-text svg {
     width: 100%;
     height: auto;
 }
 
 .hero-text path {
-    stroke: #957B4D;
-    stroke-width: 1;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    transition: stroke 0.5s ease-in-out;
-}
-
-.hero-text svg.animation-complete path {
-    fill: #fff !important;
-    stroke: none !important;
+    fill: #fff;
+    stroke: none;
 }
 
 /* News Section */
 .news-section {
-    padding: 117px 40px;
+    padding: 0;
     width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
+    overflow: hidden;
 }
 
 .news-grid {
@@ -413,26 +733,28 @@ nav.menu {
 .news-alternating-list {
     display: flex;
     flex-direction: column;
-    gap: 80px;
-    margin-top: 60px;
+    gap: 0;
 }
 
 .news-alternating-item {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 15px;
     width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
+    position: relative;
 }
 
 .news-alternating-item.reverse {
     flex-direction: row-reverse;
 }
 
+.news-alternating-item.reverse .news-alternating-content {
+    padding-left: 40px;
+    padding-right: 117px;
+}
+
 .news-alternating-image {
-    width: 720px;
+    width: 50%;
     height: 730px;
     flex: none;
     overflow: hidden;
@@ -441,11 +763,11 @@ nav.menu {
     align-items: center;
     justify-content: center;
 }
+
 .news-alternating-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
 }
 
 .news-alternating-content {
@@ -454,8 +776,9 @@ nav.menu {
     align-items: flex-start;
     padding: 117px 40px;
     width: 629px;
-    height: 413px;
-    justify-content: center;
+    height: auto;
+    min-height: 413px;
+    justify-content: flex-start;
 }
 
 .news-alternating-title {
@@ -465,19 +788,25 @@ nav.menu {
     line-height: 36px;
     color: #fff;
     margin-bottom: 18px;
+    letter-spacing: 1%;
 }
+
 .news-alternating-meta {
     font-size: 13px;
     color: #fff;
     margin-bottom: 18px;
+    letter-spacing: 1%;
 }
+
 .news-alternating-excerpt {
     font-family: 'Verdana', sans-serif;
     font-size: 13px;
     line-height: 16px;
     color: #fff;
     margin-bottom: 32px;
+    letter-spacing: 1%;
 }
+
 .news-alternating-btn {
     font-family: 'Verdana', sans-serif;
     font-size: 16px;
@@ -487,6 +816,7 @@ nav.menu {
     padding-bottom: 4px;
     transition: color 0.2s;
 }
+
 .news-alternating-btn::after {
     content: '';
     display: block;
@@ -500,27 +830,13 @@ nav.menu {
     transform-origin: left;
     transition: transform 0.3s cubic-bezier(.4,0,.2,1);
 }
+
 .news-alternating-btn:hover {
     color: #fff;
 }
+
 .news-alternating-btn:hover::after {
     transform: scaleX(1);
-}
-
-@media (max-width: 1200px) {
-    .news-alternating-image {
-        width: 400px;
-        height: 400px;
-    }
-    .news-alternating-content {
-        width: 100%;
-        padding: 40px 20px;
-        height: auto;
-    }
-    .news-alternating-item {
-        flex-direction: column !important;
-        align-items: stretch;
-    }
 }
 
 @media (max-width: 600px) {
@@ -529,47 +845,111 @@ nav.menu {
     }
     .news-alternating-image {
         width: 100%;
-        height: 200px;
+        height: 300px;
     }
     .news-alternating-content {
-        padding: 20px 10px;
+        padding: 20px;
     }
 }
 
-/* Footer */
+/* Footer Styles */
 .footer {
-    background-color: transparent;
-    padding: 164px 60px;
+    background-color: #000000;
+    color: #FFFFFF;
     width: 100%;
+}
+
+.footer-main {
     max-width: 1440px;
     margin: 0 auto;
+    padding: 50px 128px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end;
     gap: 98px;
 }
 
-.footer-logo {
-    max-width: 200px;
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.footer-logo .custom-logo {
-    max-width: 100%;
-    height: auto;
-}
-
-.footer-address {
+.footer-links a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: 'Verdana', sans-serif;
     font-size: 12px;
-    line-height: 1.2;
-    letter-spacing: 1%;
+    font-weight: 400;
+    letter-spacing: 0.01em;
 }
 
-.footer-social {
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-contact p {
+    color: #FFFFFF;
+    font-family: 'Verdana', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+.footer-social h3 {
+    color: #FFFFFF;
     font-family: 'PrioriSerBold', serif;
     font-size: 32px;
     font-weight: 700;
-    line-height: 1.07;
-    letter-spacing: 1%;
+    letter-spacing: 0.01em;
+    line-height: 1.07em;
+}
+
+.footer-copyright {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 128px;
+    height: 33px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-copyright p {
+    color: rgba(255, 255, 255, 0.51);
+    font-family: 'Verdana', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+@media (max-width: 1440px) {
+    .footer-main {
+        padding: 50px 60px;
+    }
+    
+    .footer-copyright {
+        padding: 0 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-main {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 40px;
+        padding: 40px 20px;
+    }
+    
+    .footer-copyright {
+        padding: 0 20px;
+    }
+    
+    .footer-social h3 {
+        font-size: 24px;
+    }
 }
 
 /* Styles pour les liens */
@@ -611,4 +991,397 @@ a:hover::after, .menu a:hover::after, .news-more-btn:hover::after, .news-alterna
 /* Supprime l'effet spécial sur la lettre A */
 a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .news-alternating-btn span.animated-a {
     all: unset;
+}
+
+/* Horaires Section */
+.horaires-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 80px 0;
+    overflow: hidden;
+}
+
+.horaires-container {
+    width: 100%;
+    max-width: 1440px;
+    padding: 0 128px;
+    margin: 0 auto;
+    min-height: 141px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.horaires-list {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 98px;
+}
+
+.horaire-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: 'Priori Serif OT', serif;
+    font-size: 19px;
+    line-height: 1em;
+    letter-spacing: 1%;
+    color: #FFFFFF;
+    position: relative;
+    padding: 10px 0;
+    transition: transform 0.3s ease;
+}
+
+.jour {
+    margin-bottom: 8px;
+    color: #957B4D;
+}
+
+.heures {
+    color: #FFFFFF;
+    white-space: nowrap;
+}
+
+.horaire-item.today {
+    transform: scale(1.1);
+}
+
+.horaire-item.today::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #957B4D, transparent);
+    animation: goldPulse 2s infinite;
+}
+
+@keyframes goldPulse {
+    0% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+
+@media (max-width: 1200px) {
+    .horaires-section {
+        padding: 60px 0;
+    }
+    .horaires-container {
+        padding: 0 60px;
+    }
+    .horaires-list {
+        gap: 40px;
+    }
+    .horaire-item {
+        font-size: 16px;
+    }
+    .adresse {
+        font-size: 24px;
+    }
+    .adresse-container {
+        padding: 0 60px 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .horaires-section {
+        padding: 40px 0;
+        background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(149,123,77,0.02) 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .adresse-container {
+        padding: 0 25px 40px;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .adresse {
+        width: 100%;
+        max-width: 320px;
+        font-size: 22px;
+        line-height: 1.4;
+        text-align: center;
+        white-space: normal;
+    }
+
+    .adresse br {
+        display: block;
+    }
+
+    .horaires-list {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+        padding: 25px 20px;
+        background: rgba(0,0,0,0.2);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 2px;
+        position: relative;
+    }
+
+    .horaire-item {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(149,123,77,0.08);
+        transition: all 0.3s ease;
+        position: relative;
+        gap: 12px;
+    }
+
+    .horaire-item:last-child {
+        border-bottom: none;
+    }
+
+    .jour {
+        font-family: 'Priori Serif OT', serif;
+        font-size: 15px;
+        color: #957B4D;
+        margin: 0;
+        letter-spacing: 0.08em;
+        font-weight: 400;
+    }
+
+    .heures {
+        font-family: 'Verdana', sans-serif;
+        font-size: 14px;
+        color: rgba(255,255,255,0.9);
+        letter-spacing: 0.1em;
+        font-weight: 300;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    .horaire-item.today {
+        background: transparent;
+        padding: 12px 0;
+    }
+
+    .horaire-item.today .jour {
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .horaire-item.today .heures {
+        color: #957B4D;
+        font-weight: 400;
+    }
+}
+
+@media (max-width: 480px) {
+    .horaires-section {
+        padding: 30px 0;
+    }
+
+    .horaires-list {
+        max-width: 100%;
+        margin: 0 15px;
+        padding: 20px 15px;
+    }
+
+    .horaire-item {
+        padding: 10px 0;
+        gap: 12px;
+    }
+
+    .jour {
+        font-size: 14px;
+        letter-spacing: 0.05em;
+    }
+
+    .heures {
+        font-size: 13px;
+        letter-spacing: 0.05em;
+    }
+}
+
+@media (max-width: 360px) {
+    .horaires-list {
+        margin: 0 12px;
+        padding: 15px 12px;
+    }
+
+    .horaire-item {
+        padding: 8px 0;
+        gap: 12px;
+    }
+
+    .jour {
+        font-size: 13px;
+        letter-spacing: 0.03em;
+    }
+
+    .heures {
+        font-size: 12px;
+        letter-spacing: 0.03em;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Adresse Section */
+.adresse-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 61px 60px;
+    gap: 98px;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.adresse {
+    margin: 0 auto;
+    width: fit-content;
+    max-width: 800px;
+    font-family: 'Priori Serif OT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 28px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+}
+
+@media (min-width: 751px) {
+    .adresse br {
+        display: none;
+    }
+}
+
+@media (max-width: 750px) {
+    .adresse {
+        width: 100%;
+        max-width: 320px;
+        font-size: 22px;
+        line-height: 1.4;
+        text-align: center;
+    }
+
+    .adresse br {
+        display: inline;
+    }
+}
+
+/* Map Styles */
+.map-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+
+#google-map {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.map-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Leaflet specific styles */
+.leaflet-container {
+    background-color: #000;
+}
+
+.leaflet-popup-content-wrapper {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #d4b483;
+}
+
+.leaflet-popup-tip {
+    background-color: #000;
+    border-top: 1px solid #d4b483;
+}
+
+.leaflet-control-zoom a {
+    background-color: #000;
+    color: #d4b483;
+    border: 1px solid #d4b483;
+}
+
+.leaflet-control-zoom a:hover {
+    background-color: #d4b483;
+    color: #000;
+}
+
+@media (max-width: 768px) {
+    .map-container {
+        height: 300px;
+    }
+    
+    .map-overlay {
+        height: 100px;
+    }
+}
+
+/* Map Info Window Styles */
+.map-info-window {
+    font-family: 'Verdana', sans-serif;
+    color: #000000;
+    padding: 10px;
+    max-width: 200px;
+}
+
+.map-info-window strong {
+    color: #d4b483;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
 } 

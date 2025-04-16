@@ -1,24 +1,27 @@
 <footer class="footer">
-    <div class="footer-logo">
-        <?php
-        if (has_custom_logo()) {
-            the_custom_logo();
-        }
-        ?>
+    <div class="footer-main">
+        <div class="footer-links">
+            <a href="/mentions-legales">Mentions légales</a>
+            <a href="/politique-de-confidentialite">Politique de confidentialité</a>
+            <a href="/contact">Contact</a>
+        </div>
+        
+        <div class="footer-contact">
+            <p>+33 (0)7 65 98 46 65</p>
+            <p>contact@victimofgold.com</p>
+            <p>112 Allée des Oliviers, 06400 Cannes</p>
+        </div>
+        
+        <div class="footer-social">
+            <h3>Suivez nous sur les réseaux</h3>
+            <?php
+            // Social media icons will be added here
+            ?>
+        </div>
     </div>
-
-    <div class="footer-address">
-        <p>Notre Boutique</p>
-        <p>112 boulevard de la croisette</p>
-        <p>06400 Cannes, France</p>
-        <p>07 12 34 56 78</p>
-    </div>
-
-    <div class="footer-social">
-        <p>Suivez nous sur les réseaux</p>
-        <?php
-        // Add social media icons/links here
-        ?>
+    
+    <div class="footer-copyright">
+        <p>© 2025 VICTIM OF GOLD</p>
     </div>
 </footer>
 
