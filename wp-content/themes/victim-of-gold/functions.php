@@ -32,6 +32,43 @@ function victim_of_gold_setup() {
 }
 add_action('after_setup_theme', 'victim_of_gold_setup');
 
+/**
+ * Declare WooCommerce support
+ */
+function victim_of_gold_add_woocommerce_support() {
+    add_theme_support('woocommerce');
+    add_theme_support('wc-product-gallery-zoom');
+    add_theme_support('wc-product-gallery-lightbox');
+    add_theme_support('wc-product-gallery-slider');
+    
+    // Support des shortcodes WooCommerce
+    add_filter('widget_text', 'do_shortcode');
+    add_filter('the_excerpt', 'do_shortcode');
+    add_filter('the_content', 'do_shortcode');
+    
+    add_theme_support('woocommerce', array(
+        'thumbnail_image_width' => 300,
+        'single_image_width'    => 600,
+        'product_grid'          => array(
+            'default_rows'    => 3,
+            'min_rows'        => 2,
+            'max_rows'        => 8,
+            'default_columns' => 3,
+            'min_columns'     => 2,
+            'max_columns'     => 4,
+        ),
+    ));
+}
+add_action('after_setup_theme', 'victim_of_gold_add_woocommerce_support');
+
+// Activer AJAX Add to Cart sur les pages produits
+function victim_of_gold_ajax_add_to_cart_js() {
+    if (function_exists('is_product') && is_product()) {
+        wp_enqueue_script('wc-add-to-cart');
+    }
+}
+add_action('wp_enqueue_scripts', 'victim_of_gold_ajax_add_to_cart_js');
+
 // Enqueue scripts and styles
 function victim_of_gold_scripts() {
     // Enqueue Google Fonts
@@ -50,32 +87,214 @@ function victim_of_gold_scripts() {
     // Enqueue custom fonts
     wp_enqueue_style('priori-serif', get_template_directory_uri() . '/assets/fonts/priori-serif.css', array(), '1.0.0');
     
-    // Enqueue Leaflet CSS
+    // Enqueue WooCommerce custom scripts
+    if (function_exists('is_woocommerce')) {
+        wp_enqueue_script('victim-of-gold-woocommerce', get_template_directory_uri() . '/js/woocommerce.js', array('jquery'), '1.0.0', true);
+        
+        // Localize the script with new data
+        wp_localize_script('victim-of-gold-woocommerce', 'victim_ajax', array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'wc_ajax_url' => WC_AJAX::get_endpoint("%%endpoint%%")
+        ));
+    }
+    
+    // Autres scripts existants...
     wp_enqueue_style('leaflet-css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', array(), '1.9.4');
-    
-    // Enqueue hero animation script
     wp_enqueue_script('hero-animation', get_template_directory_uri() . '/js/hero-animation.js', array(), '1.0.0', true);
-    
-    // Enqueue horaires script
     wp_enqueue_script('horaires', get_template_directory_uri() . '/js/horaires.js', array(), '1.0.0', true);
-    
-    // Enqueue Leaflet JS
     wp_enqueue_script('leaflet-js', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', array(), '1.9.4', false);
     
-    // Pass shop coordinates to JavaScript
     wp_localize_script('leaflet-js', 'shopLocation', array(
-        'lat' => 43.5500, // Latitude de Cannes
-        'lng' => 7.0167,  // Longitude de Cannes
+        'lat' => 43.5500,
+        'lng' => 7.0167,
         'address' => '112 Allée des Tournesols, 06400 Cannes'
     ));
     
-    // Enqueue custom map script (after Leaflet)
     wp_enqueue_script('victim-of-gold-map', get_template_directory_uri() . '/js/map.js', array('leaflet-js'), '1.0.0', true);
+    wp_enqueue_script('victim-of-gold-leaflet-map', get_template_directory_uri() . '/js/leaflet-map.js', array('leaflet-js'), '1.0.0', true);
 }
 add_action('wp_enqueue_scripts', 'victim_of_gold_scripts');
+
+// Charger les styles WooCommerce
+function victim_of_gold_woocommerce_styles() {
+    if (!class_exists('WooCommerce')) {
+        return;
+    }
+
+    // Charger les styles WooCommerce par défaut
+    wp_enqueue_style('woocommerce-general');
+    wp_enqueue_style('woocommerce-layout');
+    wp_enqueue_style('woocommerce-smallscreen', WC()->plugin_url() . '/assets/css/woocommerce-smallscreen.css', array(), WC_VERSION, 'only screen and (max-width: ' . apply_filters('woocommerce_style_smallscreen_breakpoint', '768px') . ')');
+    
+    // Charger les styles du thème Twenty Twenty-Five pour WooCommerce
+    wp_enqueue_style('twentytwentyfive-woocommerce', get_template_directory_uri() . '/assets/css/woocommerce.css', array('woocommerce-general', 'woocommerce-layout'), '1.0.0');
+    
+    // Charger les styles du thème après WooCommerce
+    wp_enqueue_style('victim-of-gold-style', get_stylesheet_uri(), array('woocommerce-general', 'woocommerce-layout'), '1.0.0');
+    
+    // Styles spécifiques pour la page shop
+    if (is_shop() || is_product_category() || is_product_tag()) {
+        wp_enqueue_style('victim-of-gold-shop', get_template_directory_uri() . '/assets/css/shop.css', array('woocommerce-general', 'woocommerce-layout'), '1.0.0');
+    }
+}
+add_action('wp_enqueue_scripts', 'victim_of_gold_woocommerce_styles', 20);
+
+// Ajouter le mini panier dans le header
+function victim_of_gold_add_to_cart_fragment($fragments) {
+    ob_start();
+    ?>
+    <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
+    <?php
+    $fragments['.cart-count'] = ob_get_clean();
+    return $fragments;
+}
+add_filter('woocommerce_add_to_cart_fragments', 'victim_of_gold_add_to_cart_fragment');
 
 // Custom image sizes
 function victim_of_gold_image_sizes() {
     add_image_size('news-thumbnail', 629, 400, true);
 }
-add_action('after_setup_theme', 'victim_of_gold_image_sizes'); 
+add_action('after_setup_theme', 'victim_of_gold_image_sizes');
+
+// Vérifier l'initialisation de WooCommerce
+function victim_of_gold_check_woocommerce() {
+    if (!class_exists('WooCommerce')) {
+        add_action('admin_notices', function() {
+            echo '<div class="error"><p>WooCommerce n\'est pas activé. Veuillez l\'activer pour utiliser ce thème.</p></div>';
+        });
+        return;
+    }
+
+    // Vérifier si les pages WooCommerce sont configurées
+    $cart_page_id = get_option('woocommerce_cart_page_id');
+    $checkout_page_id = get_option('woocommerce_checkout_page_id');
+    $myaccount_page_id = get_option('woocommerce_myaccount_page_id');
+
+    if (!$cart_page_id || !$checkout_page_id || !$myaccount_page_id) {
+        add_action('admin_notices', function() {
+            echo '<div class="error"><p>Les pages WooCommerce ne sont pas correctement configurées. Veuillez vérifier les paramètres WooCommerce.</p></div>';
+        });
+    }
+}
+add_action('admin_init', 'victim_of_gold_check_woocommerce');
+
+// Débogage WooCommerce
+function victim_of_gold_debug_woocommerce() {
+    if (is_checkout()) {
+        error_log('Page checkout demandée');
+        if (!class_exists('WooCommerce')) {
+            error_log('WooCommerce n\'est pas actif');
+            return;
+        }
+        
+        // Vérifie si la page checkout est configurée
+        $checkout_page_id = wc_get_page_id('checkout');
+        error_log('ID de la page checkout : ' . $checkout_page_id);
+        
+        // Vérifie si le shortcode est présent
+        $checkout_page = get_post($checkout_page_id);
+        if ($checkout_page) {
+            error_log('Contenu de la page checkout : ' . $checkout_page->post_content);
+        }
+    }
+}
+add_action('wp', 'victim_of_gold_debug_woocommerce');
+
+/**
+ * Wrap WooCommerce pages
+ */
+function victim_of_gold_woocommerce_wrapper_before() {
+    ?>
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+            <div class="container woocommerce-container">
+    <?php
+}
+add_action('woocommerce_before_main_content', 'victim_of_gold_woocommerce_wrapper_before', 10);
+
+function victim_of_gold_woocommerce_wrapper_after() {
+    ?>
+            </div>
+        </main>
+    </div>
+    <?php
+}
+add_action('woocommerce_after_main_content', 'victim_of_gold_woocommerce_wrapper_after', 10);
+
+// Remove default wrappers
+remove_action('woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
+remove_action('woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10);
+
+/**
+ * Ensure WooCommerce templates are loaded from theme
+ */
+function victim_of_gold_woocommerce_template_path() {
+    return 'woocommerce/';
+}
+add_filter('woocommerce_template_path', 'victim_of_gold_woocommerce_template_path');
+
+/**
+ * Add container to WooCommerce pages
+ */
+function victim_of_gold_woocommerce_theme_wrapper_start() {
+    echo '<div class="container woocommerce-container">';
+}
+add_action('woocommerce_before_main_content', 'victim_of_gold_woocommerce_theme_wrapper_start', 5);
+
+function victim_of_gold_woocommerce_theme_wrapper_end() {
+    echo '</div>';
+}
+add_action('woocommerce_after_main_content', 'victim_of_gold_woocommerce_theme_wrapper_end', 15);
+
+/**
+ * Customize WooCommerce checkout fields
+ */
+function victim_of_gold_woocommerce_checkout_fields($fields) {
+    // Personnaliser les champs si nécessaire
+    return $fields;
+}
+add_filter('woocommerce_checkout_fields', 'victim_of_gold_woocommerce_checkout_fields');
+
+/**
+ * Add custom body classes for WooCommerce pages
+ */
+function victim_of_gold_woocommerce_body_class($classes) {
+    if (is_woocommerce()) {
+        $classes[] = 'woocommerce-page-custom';
+        
+        if (is_checkout()) {
+            $classes[] = 'woocommerce-checkout-custom';
+        } elseif (is_cart()) {
+            $classes[] = 'woocommerce-cart-custom';
+        } elseif (is_account_page()) {
+            $classes[] = 'woocommerce-account-custom';
+        }
+    }
+    return $classes;
+}
+add_filter('body_class', 'victim_of_gold_woocommerce_body_class');
+
+/**
+ * Force WooCommerce templates loading
+ */
+function victim_of_gold_force_woocommerce_templates() {
+    if (is_checkout()) {
+        echo do_shortcode('[woocommerce_checkout]');
+    } elseif (is_cart()) {
+        echo do_shortcode('[woocommerce_cart]');
+    } elseif (is_account_page()) {
+        echo do_shortcode('[woocommerce_my_account]');
+    }
+}
+add_action('woocommerce_before_main_content', 'victim_of_gold_force_woocommerce_templates', 5);
+
+/**
+ * Remove conflicting content hooks
+ */
+function victim_of_gold_remove_conflicting_hooks() {
+    if (is_woocommerce()) {
+        remove_all_actions('the_content');
+        add_filter('the_content', 'do_shortcode', 20);
+    }
+}
+add_action('template_redirect', 'victim_of_gold_remove_conflicting_hooks'); 

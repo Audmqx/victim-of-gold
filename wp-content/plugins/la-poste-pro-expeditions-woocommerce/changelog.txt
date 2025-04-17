@@ -1,0 +1,12 @@
+== Changelog ==
+
+2024-12-09 - version 1.0.2
+* Fixed translation issues with woocommerce blocks
+* Replaced mapbox with maplibre
+* Maplibre token is now loaded when opening the parcel point map
+
+2024-12-05 - version 1.0.1
+* Fixed frontoffice translation issues
+
+2024-04-24 - version 1.0.0
+* first stable release
