@@ -1,3 +1,6 @@
+<?php
+require_once('../../../wp-load.php');
+?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -23,22 +26,23 @@
         .maintenance-image {
             max-width: 100%;
             height: auto;
-            margin-bottom: 30px;
+            margin-top: 30px;
         }
         .coming-soon {
-            color: #FFD700;
+            color: #957B4D;
             font-size: 48px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 4px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
         }
     </style>
 </head>
 <body>
     <div class="maintenance-container">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/maintenance.jpg" alt="Maintenance" class="maintenance-image">
         <h1 class="coming-soon">COMING SOON</h1>
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/maintenance.jpg" alt="Maintenance" class="maintenance-image">
     </div>
 </body>
 </html> 
