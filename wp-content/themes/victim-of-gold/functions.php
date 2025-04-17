@@ -275,26 +275,48 @@ function victim_of_gold_woocommerce_body_class($classes) {
 add_filter('body_class', 'victim_of_gold_woocommerce_body_class');
 
 /**
- * Force WooCommerce templates loading
+ * Force WooCommerce shortcodes
  */
-function victim_of_gold_force_woocommerce_templates() {
+function victim_of_gold_force_woocommerce_shortcodes() {
+    // Ne pas exécuter cette fonction sur la page checkout
     if (is_checkout()) {
-        echo do_shortcode('[woocommerce_checkout]');
-    } elseif (is_cart()) {
+        return;
+    }
+    
+    if (is_cart()) {
         echo do_shortcode('[woocommerce_cart]');
     } elseif (is_account_page()) {
         echo do_shortcode('[woocommerce_my_account]');
     }
 }
-add_action('woocommerce_before_main_content', 'victim_of_gold_force_woocommerce_templates', 5);
+add_action('woocommerce_before_main_content', 'victim_of_gold_force_woocommerce_shortcodes', 5);
+
+// Désactiver la redirection automatique du checkout vers le panier
+function victim_of_gold_disable_checkout_redirect() {
+    return false;
+}
+add_filter('woocommerce_checkout_redirect_empty_cart', 'victim_of_gold_disable_checkout_redirect');
 
 /**
- * Remove conflicting content hooks
+ * Force WooCommerce to use our custom templates
  */
-function victim_of_gold_remove_conflicting_hooks() {
-    if (is_woocommerce()) {
-        remove_all_actions('the_content');
-        add_filter('the_content', 'do_shortcode', 20);
+function victim_of_gold_force_woocommerce_templates() {
+    if (class_exists('WooCommerce')) {
+        // Définir le chemin des templates WooCommerce
+        add_filter('woocommerce_template_path', function() {
+            return 'woocommerce/';
+        });
+
+        // S'assurer que WooCommerce utilise nos templates
+        add_filter('template_include', function($template) {
+            if (is_shop() || is_product_category() || is_product_tag()) {
+                $new_template = locate_template(array('woocommerce/archive-product.php'));
+                if (!empty($new_template)) {
+                    return $new_template;
+                }
+            }
+            return $template;
+        }, 99);
     }
 }
-add_action('template_redirect', 'victim_of_gold_remove_conflicting_hooks'); 
+add_action('after_setup_theme', 'victim_of_gold_force_woocommerce_templates'); 
