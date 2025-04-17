@@ -33,7 +33,7 @@
 *.log
 
 # htaccess
-/.htaccess
+# /.htaccess
 
 # All plugins
 #
