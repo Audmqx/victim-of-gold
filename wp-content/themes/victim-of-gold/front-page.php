@@ -3,6 +3,10 @@
 <main id="main" class="site-main">
     <!-- HERO SECTION -->
     <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline preload="auto">
+            <source src="<?php echo get_template_directory_uri(); ?>/assets/images/acceuil-short.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture de vidéos.
+        </video>
         <div class="hero-text">
             <?php include get_template_directory() . '/assets/images/hero-text.svg'; ?>
         </div>
@@ -42,51 +46,17 @@
             <?php $i++; endwhile; wp_reset_postdata(); endif; ?>
         </div>
     </section>
-
-    <!-- HORAIRES SECTION -->
-    <section class="horaires-section">
-        <div class="adresse-container">
-            <p class="adresse">112 Allée des Tournesols,<br> 06400 Cannes</p>
-        </div>
-        
-        <div class="map-container">
-            <div id="google-map"></div>
-            <div class="map-overlay"></div>
-        </div>
-
-        <div class="horaires-container">
-            <div class="horaires-list">
-                <div class="horaire-item" data-day="1">
-                    <span class="jour">Lundi</span>
-                    <span class="heures">10.00 - 19.00</span>
-                </div>
-                <div class="horaire-item" data-day="2">
-                    <span class="jour">Mardi</span>
-                    <span class="heures">10.00 - 19.00</span>
-                </div>
-                <div class="horaire-item" data-day="3">
-                    <span class="jour">Mercredi</span>
-                    <span class="heures">10.00 - 19.00</span>
-                </div>
-                <div class="horaire-item" data-day="4">
-                    <span class="jour">Jeudi</span>
-                    <span class="heures">10.00 - 19.00</span>
-                </div>
-                <div class="horaire-item" data-day="5">
-                    <span class="jour">Vendredi</span>
-                    <span class="heures">10.00 - 19.00</span>
-                </div>
-                <div class="horaire-item" data-day="6">
-                    <span class="jour">Samedi</span>
-                    <span class="heures">10.00 - 19.00</span>
-                </div>
-                <div class="horaire-item" data-day="0">
-                    <span class="jour">Dimanche</span>
-                    <span class="heures">10.00 - 19.00</span>
-                </div>
-            </div>
-        </div>
-    </section>
 </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var video = document.querySelector('.hero-video');
+    if (video) {
+        video.play().catch(function(error) {
+            console.log("Erreur de lecture automatique:", error);
+        });
+    }
+});
+</script>
 
 <?php get_footer(); ?> 

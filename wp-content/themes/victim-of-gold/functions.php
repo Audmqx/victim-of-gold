@@ -180,12 +180,20 @@ add_action('admin_init', 'victim_of_gold_check_woocommerce');
 
 // Débogage WooCommerce
 function victim_of_gold_debug_woocommerce() {
+    // Vérifier si WooCommerce est actif et chargé
+    if (!class_exists('WooCommerce')) {
+        error_log('WooCommerce n\'est pas actif');
+        return;
+    }
+
+    // Vérifier si les fonctions WooCommerce sont disponibles
+    if (!function_exists('is_checkout') || !function_exists('wc_get_page_id')) {
+        error_log('Les fonctions WooCommerce ne sont pas disponibles');
+        return;
+    }
+    
     if (is_checkout()) {
         error_log('Page checkout demandée');
-        if (!class_exists('WooCommerce')) {
-            error_log('WooCommerce n\'est pas actif');
-            return;
-        }
         
         // Vérifie si la page checkout est configurée
         $checkout_page_id = wc_get_page_id('checkout');

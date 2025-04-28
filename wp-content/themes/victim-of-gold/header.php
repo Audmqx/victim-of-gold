@@ -2,7 +2,8 @@
 <html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/fonts/priori-serif-ot.otf" as="font" type="font/otf" crossorigin>
     <?php wp_head(); ?>
 </head>
 
@@ -30,26 +31,24 @@
                     'walker' => new VOG_Menu_Walker()
                 ));
                 ?>
+            </nav>
 
+            <div class="icons-container">
                 <?php if (class_exists('WooCommerce')) : ?>
                 <div class="cart-icon">
                     <a href="<?php echo esc_url(wc_get_cart_url()); ?>" class="cart-contents" title="<?php esc_attr_e('View your shopping cart', 'victim-of-gold'); ?>">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="9" cy="21" r="1"></circle>
-                            <circle cx="20" cy="21" r="1"></circle>
-                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                        </svg>
+                        <?php include get_template_directory() . '/assets/images/panier.svg'; ?>
                         <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
                     </a>
                 </div>
                 <?php endif; ?>
 
-                <div class="language-selector">
-                    <a href="<?php echo esc_url(home_url('/?lang=fr')); ?>" class="<?php echo (get_locale() === 'fr_FR') ? 'active' : ''; ?>">FR</a>
-                    <span>.</span>
-                    <a href="<?php echo esc_url(home_url('/?lang=en')); ?>" class="<?php echo (get_locale() === 'en_US') ? 'active' : ''; ?>">EN</a>
+                <div class="profile-icon">
+                    <a href="<?php echo esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))); ?>" title="<?php esc_attr_e('My Account', 'victim-of-gold'); ?>">
+                        <?php include get_template_directory() . '/assets/images/profil.svg'; ?>
+                    </a>
                 </div>
-            </nav>
+            </div>
 
             <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
                 <span></span>
