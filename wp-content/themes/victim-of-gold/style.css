@@ -21,6 +21,16 @@ Text Domain: victim-of-gold
     unicode-range: U+000-5FF; /* Latin glyphs */
 }
 
+@font-face {
+    font-family: 'PrioriSerBold';
+    src: local('PrioriSerBold'),
+         url('./assets/fonts/PrioriSerBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+000-5FF; /* Latin glyphs */
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -131,7 +141,7 @@ nav.menu {
     gap: 24px;
     padding: 10px;
     overflow: visible;
-    height: 32px;
+    height: 24px;
     margin-right: 48px;
 }
 
@@ -141,7 +151,7 @@ nav.menu {
     align-items: center;
     justify-content: center;
     overflow: visible;
-    height: 32px;
+    height: 24px;
 }
 
 .cart-icon a, .profile-icon a {
@@ -152,12 +162,12 @@ nav.menu {
     text-decoration: none;
     position: relative;
     overflow: visible;
-    height: 32px;
+    height: 24px;
 }
 
 .cart-icon svg, .profile-icon svg {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     fill: none;
     stroke: #FFFFFF;
     stroke-width: 0.8px;
@@ -240,17 +250,17 @@ nav.menu {
 }
 
 /* Responsive Styles */
-@media (max-width: 1440px) {
-    .news-alternating-content {
-        width: 45%;
-        padding: 80px 40px;
-    }
-    .news-alternating-image {
-        width: 55%;
-        height: 600px;
-    }
+@media (max-width: 1450px) and (min-width: 1200px) {
     .menu-container {
-        gap: calc(200px + 15vw);
+        gap: 40px;
+    }
+    
+    .menu {
+        gap: 30px;
+    }
+
+    .icons-container {
+        margin-right: 20px;
     }
 }
 
@@ -351,12 +361,13 @@ nav.menu {
     }
 
     .icons-container {
-        gap: 0;
+        display: flex;
+        gap: 32px;
         margin-right: 20px;
     }
 
     .menu.active ~ .icons-container {
-        gap: 48px;
+        gap: 32px;
     }
 
     .cart-icon, .profile-icon {
@@ -438,10 +449,6 @@ nav.menu {
         padding: 20px 0;
         justify-content: center;
     }
-
-    .icons-container {
-        display: none;
-    }
 }
 
 @media (max-width: 992px) {
@@ -490,7 +497,7 @@ nav.menu {
     }
 
     .icons-container {
-        gap: 24px;
+        gap: 32px;
         margin-right: 24px;
         height: 24px;
     }
@@ -792,7 +799,7 @@ nav.menu {
     }
 
     .icons-container {
-        gap: 16px;
+        gap: 24px;
         margin-right: 16px;
     }
 }
@@ -1108,9 +1115,8 @@ nav.menu {
 
 .footer-social h3 {
     color: #FFFFFF;
-    font-family: 'Priori Serif OT', serif;
+    font-family: 'PrioriSerBold', serif;
     font-size: 32px;
-    font-weight: 700;
     letter-spacing: 0.01em;
     line-height: 1.07em;
 }
@@ -1784,255 +1790,5 @@ a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .new
     }
 }
 
-/* Newsletter Section */
-.newsletter-section {
-    background-color: #000000;
-    padding: 120px 0;
-    text-align: center;
-}
 
-.newsletter-container {
-    max-width: 507px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.newsletter-section h2 {
-    font-family: 'Priori Serif OT', serif;
-    font-size: 22px;
-    color: #FFFFFF;
-    margin-bottom: 20px;
-    font-weight: 400;
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
-}
-
-.newsletter-section p {
-    font-family: 'Priori Serif OT', serif;
-    font-size: 22px;
-    color: #FFFFFF;
-    margin-bottom: 40px;
-    font-weight: 400;
-    line-height: 1.4;
-}
-
-/* Styles pour le formulaire personnalisé */
-.custom-newsletter {
-    max-width: 507px;
-    margin: 0 auto;
-    background: #FFFFFF;
-    border-radius: 8px;
-    padding: 40px;
-    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1);
-}
-
-.custom-newsletter form {
-    margin: 0;
-    padding: 0;
-}
-
-.custom-newsletter input[type="email"] {
-    background-color: #FFFFFF !important;
-    border: 1px solid #957B4D !important;
-    border-radius: 4px !important;
-    color: #000000 !important;
-    padding: 16px 20px !important;
-    font-family: 'Priori Serif OT', serif !important;
-    font-size: 16px !important;
-    width: 100% !important;
-    margin-bottom: 20px !important;
-    height: 56px !important;
-    box-sizing: border-box !important;
-}
-
-.custom-newsletter input[type="email"]::placeholder {
-    color: #957B4D !important;
-    opacity: 0.7;
-    font-family: 'Priori Serif OT', serif !important;
-    font-style: normal;
-}
-
-.custom-newsletter input[type="submit"] {
-    background-color: transparent !important;
-    border: 1px solid #957B4D !important;
-    border-radius: 4px !important;
-    color: #957B4D !important;
-    height: 56px !important;
-    font-family: 'Priori Serif OT', serif !important;
-    font-size: 16px !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    text-transform: uppercase !important;
-    width: 100% !important;
-    letter-spacing: 0.05em !important;
-    box-sizing: border-box !important;
-}
-
-.custom-newsletter input[type="submit"]:hover {
-    background-color: #957B4D !important;
-    color: #FFFFFF !important;
-}
-
-@media (max-width: 768px) {
-    .newsletter-section {
-        padding: 80px 0;
-    }
-
-    .newsletter-container {
-        padding: 0 30px;
-    }
-
-    .custom-newsletter {
-        padding: 30px;
-    }
-}
-
-@media (max-width: 480px) {
-    .newsletter-section {
-        padding: 60px 0;
-    }
-
-    .newsletter-container {
-        padding: 0 20px;
-    }
-
-    .custom-newsletter {
-        padding: 20px;
-    }
-
-    .newsletter-section h2,
-    .newsletter-section p {
-        font-size: 18px;
-    }
-}
-
-/* Surcharges MailPoet */
-.newsletter-section form.mailpoet_form {
-    margin: 0 !important;
-    padding: 0 !important;
-    display: flex !important;
-    gap: 16px !important;
-    max-width: 507px !important;
-    margin: 0 auto !important;
-}
-
-.newsletter-section .mailpoet_paragraph {
-    margin: 0 !important;
-    padding: 0 !important;
-    flex: 1 !important;
-}
-
-.newsletter-section .mailpoet_paragraph:last-child {
-    flex: 0 0 auto !important;
-    width: auto !important;
-}
-
-.newsletter-section .mailpoet_text_label,
-.newsletter-section .mailpoet_segment_label {
-    display: none !important;
-}
-
-.newsletter-section .mailpoet_text {
-    background-color: transparent !important;
-    border: 1px solid #957B4D !important;
-    border-radius: 4px !important;
-    color: #FFFFFF !important;
-    padding: 16px 20px !important;
-    font-family: 'Priori Serif OT', serif !important;
-    font-size: 16px !important;
-    width: 100% !important;
-    height: 56px !important;
-    box-sizing: border-box !important;
-    margin: 0 !important;
-}
-
-.newsletter-section .mailpoet_text::placeholder {
-    color: #957B4D !important;
-    opacity: 0.7 !important;
-    font-family: 'Priori Serif OT', serif !important;
-    font-style: normal !important;
-}
-
-.newsletter-section .mailpoet_submit {
-    background-color: transparent !important;
-    border: 1px solid #957B4D !important;
-    border-radius: 4px !important;
-    color: #957B4D !important;
-    height: 56px !important;
-    font-family: 'Priori Serif OT', serif !important;
-    font-size: 16px !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    text-transform: uppercase !important;
-    padding: 0 40px !important;
-    margin: 0 !important;
-    white-space: nowrap !important;
-}
-
-.newsletter-section .mailpoet_submit:hover {
-    background-color: #957B4D !important;
-    color: #FFFFFF !important;
-}
-
-.newsletter-section .mailpoet_form_loading {
-    display: none !important;
-}
-
-.newsletter-section .mailpoet_message {
-    margin-top: 10px !important;
-    color: #957B4D !important;
-    font-family: 'Priori Serif OT', serif !important;
-    font-size: 14px !important;
-}
-
-.newsletter-section .mailpoet_validate_success {
-    color: #957B4D !important;
-}
-
-.newsletter-section .mailpoet_validate_error {
-    color: #ff4444 !important;
-}
-
-/* Suppression des espacements entre colonnes */
-.newsletter-section .mailpoet_form_column:not(:first-child) {
-    margin-left: 0 !important;
-}
-
-/* Suppression du padding des colonnes avec background */
-.newsletter-section .mailpoet_column_with_background {
-    padding: 0 !important;
-}
-
-@media (max-width: 768px) {
-    .newsletter-section {
-        padding: 80px 0;
-    }
-
-    .newsletter-container {
-        padding: 0 30px;
-    }
-
-    .newsletter-section form.mailpoet_form {
-        flex-direction: column !important;
-    }
-
-    .newsletter-section .mailpoet_submit {
-        width: 100% !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .newsletter-section {
-        padding: 60px 0;
-    }
-
-    .newsletter-container {
-        padding: 0 20px;
-    }
-
-    .newsletter-section h2,
-    .newsletter-section p {
-        font-size: 18px;
-    }
-}
 

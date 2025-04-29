@@ -327,4 +327,10 @@ function victim_of_gold_force_woocommerce_templates() {
         }, 99);
     }
 }
-add_action('after_setup_theme', 'victim_of_gold_force_woocommerce_templates'); 
+add_action('after_setup_theme', 'victim_of_gold_force_woocommerce_templates');
+
+// Enqueue newsletter styles
+function victim_of_gold_newsletter_styles() {
+    wp_enqueue_style('victim-of-gold-newsletter', get_template_directory_uri() . '/assets/css/newsletter.css', array(), '1.0.0');
+}
+add_action('wp_enqueue_scripts', 'victim_of_gold_newsletter_styles'); 
