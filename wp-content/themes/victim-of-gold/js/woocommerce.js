@@ -1,7 +1,12 @@
 jQuery(function($) {
     // Mise à jour du mini panier
     function updateMiniCart() {
-        $.ajax({
+        // Éviter les appels multiples en vérifiant si une requête est déjà en cours
+        if (updateMiniCart.request) {
+            return;
+        }
+        
+        updateMiniCart.request = $.ajax({
             url: victim_ajax.wc_ajax_url.toString().replace('%%endpoint%%', 'get_refreshed_fragments'),
             type: 'POST',
             success: function(response) {
@@ -10,6 +15,10 @@ jQuery(function($) {
                         $(key).replaceWith(value);
                     });
                 }
+                updateMiniCart.request = null;
+            },
+            error: function() {
+                updateMiniCart.request = null;
             }
         });
     }
@@ -57,7 +66,11 @@ jQuery(function($) {
 
     // Mise à jour de la quantité dans le panier
     $(document).on('change', '.woocommerce-cart-form .qty', function() {
-        $('[name="update_cart"]').trigger('click');
+        // Utiliser un délai pour éviter les appels multiples lors de changements rapides
+        clearTimeout($(this).data('timeout'));
+        $(this).data('timeout', setTimeout(function() {
+            $('[name="update_cart"]').trigger('click');
+        }, 500));
     });
 
     // Animation du mini panier lors de l'ajout d'un produit

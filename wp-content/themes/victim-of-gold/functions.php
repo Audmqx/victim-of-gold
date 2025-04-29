@@ -212,20 +212,26 @@ add_action('wp', 'victim_of_gold_debug_woocommerce');
  * Wrap WooCommerce pages
  */
 function victim_of_gold_woocommerce_wrapper_before() {
-    ?>
-    <div id="primary" class="content-area">
-        <main id="main" class="site-main">
-            <div class="container woocommerce-container">
-    <?php
+    // Vérifier si nous sommes sur une page WooCommerce
+    if (is_woocommerce() || is_cart() || is_checkout() || is_account_page()) {
+        ?>
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main">
+                <div class="container woocommerce-container">
+        <?php
+    }
 }
 add_action('woocommerce_before_main_content', 'victim_of_gold_woocommerce_wrapper_before', 10);
 
 function victim_of_gold_woocommerce_wrapper_after() {
-    ?>
-            </div>
-        </main>
-    </div>
-    <?php
+    // Vérifier si nous sommes sur une page WooCommerce
+    if (is_woocommerce() || is_cart() || is_checkout() || is_account_page()) {
+        ?>
+                </div>
+            </main>
+        </div>
+        <?php
+    }
 }
 add_action('woocommerce_after_main_content', 'victim_of_gold_woocommerce_wrapper_after', 10);
 
@@ -240,19 +246,6 @@ function victim_of_gold_woocommerce_template_path() {
     return 'woocommerce/';
 }
 add_filter('woocommerce_template_path', 'victim_of_gold_woocommerce_template_path');
-
-/**
- * Add container to WooCommerce pages
- */
-function victim_of_gold_woocommerce_theme_wrapper_start() {
-    echo '<div class="container woocommerce-container">';
-}
-add_action('woocommerce_before_main_content', 'victim_of_gold_woocommerce_theme_wrapper_start', 5);
-
-function victim_of_gold_woocommerce_theme_wrapper_end() {
-    echo '</div>';
-}
-add_action('woocommerce_after_main_content', 'victim_of_gold_woocommerce_theme_wrapper_end', 15);
 
 /**
  * Customize WooCommerce checkout fields
