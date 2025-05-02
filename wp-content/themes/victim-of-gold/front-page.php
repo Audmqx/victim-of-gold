@@ -3,7 +3,8 @@
 <main id="main" class="site-main">
     <!-- HERO SECTION -->
     <section class="hero">
-        <video class="hero-video" autoplay muted loop playsinline preload="auto">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata" 
+        webkit-playsinline x-webkit-airplay="allow">
             <source src="<?php echo get_template_directory_uri(); ?>/assets/images/acceuil-short.mp4" type="video/mp4">
             Votre navigateur ne supporte pas la lecture de vidéos.
         </video>

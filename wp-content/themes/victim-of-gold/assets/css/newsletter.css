@@ -1,9 +1,9 @@
 /* Newsletter Section */
 .newsletter-section {
     text-align: center;
-    max-width: 600px;
     margin: 0 auto;
     padding-bottom: 50px;
+    background-color: black;
 }
 
 /* Newsletter Form */
@@ -110,6 +110,11 @@
 
 .newsletter-container p {
     padding: 20px 0;
+    color: white;
+}
+
+.newsletter-container h2 {
+    color: white;
 }
 
 /* Grand écran (1200px et plus) */

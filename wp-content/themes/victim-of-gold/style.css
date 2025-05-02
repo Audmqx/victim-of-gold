@@ -1252,9 +1252,9 @@ a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .new
 }
 
 .horaire-item h3 {
-    font-family: 'Priori Serif OT', serif;
-    font-weight: 400;
+    font-family: 'PrioriSerBold', 'Priori Serif', serif;
     font-size: 22px;
+    font-weight: 700;
     line-height: 1em;
     letter-spacing: 1%;
     color: #957B4D;

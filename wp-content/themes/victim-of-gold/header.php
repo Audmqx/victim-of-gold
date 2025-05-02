@@ -34,6 +34,13 @@
             </nav>
 
             <div class="icons-container">
+            
+                <div class="profile-icon">
+                    <a href="<?php echo esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))); ?>" title="<?php esc_attr_e('My Account', 'victim-of-gold'); ?>">
+                        <?php include get_template_directory() . '/assets/images/profil.svg'; ?>
+                    </a>
+                </div>
+
                 <?php if (class_exists('WooCommerce')) : ?>
                 <div class="cart-icon">
                     <a href="<?php echo esc_url(wc_get_cart_url()); ?>" class="cart-contents" title="<?php esc_attr_e('View your shopping cart', 'victim-of-gold'); ?>">
@@ -42,12 +49,6 @@
                     </a>
                 </div>
                 <?php endif; ?>
-
-                <div class="profile-icon">
-                    <a href="<?php echo esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))); ?>" title="<?php esc_attr_e('My Account', 'victim-of-gold'); ?>">
-                        <?php include get_template_directory() . '/assets/images/profil.svg'; ?>
-                    </a>
-                </div>
             </div>
 
             <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="menu">

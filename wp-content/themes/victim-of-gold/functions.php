@@ -326,4 +326,138 @@ add_action('after_setup_theme', 'victim_of_gold_force_woocommerce_templates');
 function victim_of_gold_newsletter_styles() {
     wp_enqueue_style('victim-of-gold-newsletter', get_template_directory_uri() . '/assets/css/newsletter.css', array(), '1.0.0');
 }
-add_action('wp_enqueue_scripts', 'victim_of_gold_newsletter_styles'); 
+add_action('wp_enqueue_scripts', 'victim_of_gold_newsletter_styles');
+
+/**
+ * Enqueue WooCommerce single product scripts and styles
+ */
+function vog_enqueue_single_product_assets() {
+    if (is_product()) {
+        wp_enqueue_style(
+            'vog-single-product',
+            get_template_directory_uri() . '/assets/css/woocommerce-single-product.css',
+            array(),
+            '1.0.0'
+        );
+
+        wp_enqueue_script(
+            'vog-single-product',
+            get_template_directory_uri() . '/js/single-product.js',
+            array('jquery'),
+            '1.0.0',
+            true
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'vog_enqueue_single_product_assets');
+
+/**
+ * Add custom product data tabs
+ */
+function vog_product_tabs($tabs) {
+    $tabs['additional_info'] = array(
+        'label'    => __('Informations additionnelles', 'victim-of-gold'),
+        'target'   => 'additional_product_data',
+        'class'    => array('show_if_simple', 'show_if_variable'),
+        'priority' => 21
+    );
+    return $tabs;
+}
+add_filter('woocommerce_product_data_tabs', 'vog_product_tabs');
+
+/**
+ * Add custom product data fields
+ */
+function vog_product_data_fields() {
+    global $post;
+    
+    echo '<div id="additional_product_data" class="panel woocommerce_options_panel">';
+    
+    // Champ Entretien
+    woocommerce_wp_textarea_input(array(
+        'id'          => '_entretien',
+        'label'       => __('Entretien', 'victim-of-gold'),
+        'desc_tip'    => true,
+        'description' => __('Instructions d\'entretien du produit', 'victim-of-gold')
+    ));
+    
+    // Champ Taille
+    woocommerce_wp_textarea_input(array(
+        'id'          => '_taille',
+        'label'       => __('Taille', 'victim-of-gold'),
+        'desc_tip'    => true,
+        'description' => __('Informations de taille du produit', 'victim-of-gold')
+    ));
+    
+    // Champ Livraison & Retours
+    woocommerce_wp_textarea_input(array(
+        'id'          => '_livraison_retours',
+        'label'       => __('Livraison & Retours', 'victim-of-gold'),
+        'desc_tip'    => true,
+        'description' => __('Informations de livraison et retours', 'victim-of-gold')
+    ));
+    
+    echo '</div>';
+}
+add_action('woocommerce_product_data_panels', 'vog_product_data_fields');
+
+/**
+ * Save custom product data fields
+ */
+function vog_save_product_data($post_id) {
+    // Entretien
+    $entretien = isset($_POST['_entretien']) ? wp_kses_post($_POST['_entretien']) : '';
+    update_post_meta($post_id, '_entretien', $entretien);
+    
+    // Taille
+    $taille = isset($_POST['_taille']) ? wp_kses_post($_POST['_taille']) : '';
+    update_post_meta($post_id, '_taille', $taille);
+    
+    // Livraison & Retours
+    $livraison_retours = isset($_POST['_livraison_retours']) ? wp_kses_post($_POST['_livraison_retours']) : '';
+    update_post_meta($post_id, '_livraison_retours', $livraison_retours);
+}
+add_action('woocommerce_process_product_meta', 'vog_save_product_data');
+
+// Traduction des messages WooCommerce
+function vog_custom_wc_add_to_cart_message($message, $products) {
+    $titles = array();
+    $count  = 0;
+
+    if (is_array($products)) {
+        foreach ($products as $product_id => $qty) {
+            $titles[] = get_the_title($product_id);
+            $count += $qty;
+        }
+    }
+
+    if (count($titles) === 1) {
+        $message = sprintf('%s a été ajouté à votre panier.', $titles[0]);
+    } elseif (count($titles) > 1) {
+        $message = 'Les produits ont été ajoutés à votre panier.';
+    }
+
+    return $message;
+}
+add_filter('wc_add_to_cart_message_html', 'vog_custom_wc_add_to_cart_message', 10, 2);
+
+// Modifier le texte du bouton "View cart"
+function vog_change_view_cart_button_text($translated_text, $text, $domain) {
+    if ($domain === 'woocommerce') {
+        switch ($text) {
+            case 'View cart':
+                $translated_text = 'Voir le panier';
+                break;
+            case 'Add to cart':
+                $translated_text = 'Ajouter au panier';
+                break;
+        }
+    }
+    return $translated_text;
+}
+add_filter('gettext', 'vog_change_view_cart_button_text', 20, 3);
+
+/**
+ * Include WooCommerce translations
+ */
+require get_template_directory() . '/inc/woocommerce-translations.php'; 

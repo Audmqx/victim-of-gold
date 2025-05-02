@@ -1,0 +1,81 @@
+{
+    "key": "group_product_details",
+    "title": "Détails du produit",
+    "fields": [
+        {
+            "key": "field_entretien",
+            "label": "Entretien",
+            "name": "entretien",
+            "type": "wysiwyg",
+            "instructions": "Ajoutez les instructions d'entretien du produit",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_taille",
+            "label": "Taille",
+            "name": "taille",
+            "type": "wysiwyg",
+            "instructions": "Ajoutez les informations de taille du produit",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_livraison_retours",
+            "label": "Livraison & Retours",
+            "name": "livraison_retours",
+            "type": "wysiwyg",
+            "instructions": "Ajoutez les informations de livraison et retours",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "product"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+} 
