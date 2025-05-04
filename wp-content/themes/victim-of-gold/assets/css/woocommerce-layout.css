@@ -69,16 +69,7 @@
 }
 
 /* Account */
-.woocommerce-account .woocommerce-MyAccount-navigation {
-    float: left;
-    width: 30%;
-    margin-right: 5%;
-}
-
-.woocommerce-account .woocommerce-MyAccount-content {
-    float: right;
-    width: 65%;
-}
+/* SUPPRESSION TOTALE : .woocommerce-account .woocommerce-MyAccount-navigation { ... } */
 
 /* Responsive */
 @media screen and (max-width: 768px) {
