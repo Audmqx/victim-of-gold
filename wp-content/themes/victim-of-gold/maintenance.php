@@ -55,6 +55,7 @@ require_once('../../../wp-load.php');
 <body>
     <div class="maintenance-container">
         <h1 class="coming-soon">COMING SOON</h1>
+        <?php echo do_shortcode('[mailpoet_form id="2"]'); ?>
         <object id="svgObject" class="maintenance-svg" type="image/svg+xml" data="<?php echo get_template_directory_uri(); ?>/assets/images/maintenance.svg"></object>
     </div>
 
