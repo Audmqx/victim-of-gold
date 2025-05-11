@@ -465,12 +465,13 @@ require get_template_directory() . '/inc/woocommerce-translations.php';
 // Notification MailPoet : envoi d'un email à chaque inscription via le formulaire n°2
 add_action('mailpoet_subscription_before_subscribe', function ($data, $segmentIds, $form) {
     if ($form && method_exists($form, 'getId') && $form->getId() == 2) {
-        $to = 'jc@victimofgold.com'; // Remplace par l'adresse de notification souhaitée
-        $subject = 'Un nouvel message est arrivé depuis la page d\'accueil / maintenance';
-        $message = "Un nouvel message est arrivé depuis la page d'accueil / maintenance :\n";
+        $to = 'jc@victimofgold.com';
+        $subject = 'Un nouveau message est arrivé depuis la page d\'accueil / maintenance';
+        $message = "Un nouveau message est arrivé depuis la page d'accueil / maintenance :\n";
         foreach ($data as $key => $value) {
             $message .= ucfirst($key) . " : " . $value . "\n";
         }
-        wp_mail($to, $subject, $message);
+        $headers = array('From: Victim of Gold <contact@victimofgold.com>');
+        wp_mail($to, $subject, $message, $headers);
     }
 }, 10, 3); 
