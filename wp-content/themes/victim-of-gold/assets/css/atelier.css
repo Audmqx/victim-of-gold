@@ -1,0 +1,99 @@
+/* Styles pour la page Atelier */
+
+.atelier-hero-bg {
+    position: relative;
+    background: url('../images/mock.png') center/cover no-repeat;
+    min-height: 100vh; /* Pleine hauteur d'écran */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.atelier-hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255,255,255,0.6); /* Couvre toute la largeur */
+    z-index: 1;
+    pointer-events: none;
+}
+.atelier-hero-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 60px 0;
+    gap: 60px;
+}
+.atelier-hero-graphic {
+    display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+}
+.atelier-hero-graphic img {
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.atelier-hero-text {
+    background: rgba(255,255,255,0.85);
+    padding: 36px 48px;
+    font-size: 1.1rem;
+    color: #222;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    line-height: 1.6;
+    font-family: 'Priori Serif OT', serif;
+    width: 50%;
+}
+
+.atelier-hero-text p{
+    max-width: 500px;
+}
+.atelier-gallery {
+    padding: 40px 0;
+}
+.atelier-gallery-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.atelier-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+.atelier-gallery-grid img {
+    width: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 900px) {
+    .atelier-hero-container {
+        flex-direction: column;
+        gap: 30px;
+        padding: 30px 0;
+    }
+    .atelier-hero-graphic {
+        justify-content: center;
+    }
+    .atelier-hero-text {
+        max-width: 90vw;
+        padding: 24px 12px;
+    }
+    .atelier-gallery-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 600px) {
+    .atelier-hero-text {
+        padding: 20px 10px;
+    }
+    .atelier-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+} 

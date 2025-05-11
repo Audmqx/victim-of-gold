@@ -474,4 +474,21 @@ add_action('mailpoet_subscription_before_subscribe', function ($data, $segmentId
         $headers = array('From: Victim of Gold <contact@victimofgold.com>');
         wp_mail($to, $subject, $message, $headers);
     }
-}, 10, 3); 
+}, 10, 3);
+
+// Enqueue Lightbox2 pour la galerie de la page Atelier
+function atelier_enqueue_lightbox() {
+    if (is_page('atelier')) {
+        wp_enqueue_style('lightbox2', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css');
+        wp_enqueue_script('lightbox2', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js', array('jquery'), null, true);
+    }
+}
+add_action('wp_enqueue_scripts', 'atelier_enqueue_lightbox');
+
+// Enqueue le CSS spécifique pour la page Atelier
+function atelier_enqueue_styles() {
+    if (is_page('atelier')) {
+        wp_enqueue_style('atelier-css', get_template_directory_uri() . '/assets/css/atelier.css');
+    }
+}
+add_action('wp_enqueue_scripts', 'atelier_enqueue_styles'); 

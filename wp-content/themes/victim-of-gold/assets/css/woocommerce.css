@@ -1153,13 +1153,7 @@ background-color: white !important;
 .woocommerce-message {
     /* Traduction du message de suppression d'article du panier */
 }
-/* .woocommerce-message::after {
-    content: ' supprimé. Annuler ?';
-    color: #1D1D1B;
-    font-family: 'Verdana', sans-serif;
-    font-size: 13px;
-    margin-left: 4px;
-} */
+
 .woocommerce-message .restore-item {
     font-size: 13px;
     color: #957B4D;
@@ -1388,8 +1382,8 @@ background-color: white !important;
 }
 
 /* Liens dorés et lisibles dans le checkout */
-body.woocommerce-checkout a,
-body.woocommerce-checkout .woocommerce-form-coupon-toggle a {
+.woocommerce-checkout .woocommerce a,
+.woocommerce-checkout .woocommerce-form-coupon-toggle a {
     color: #957B4D !important;
     font-size: 16px;
     font-family: 'Verdana', sans-serif;
@@ -1397,8 +1391,8 @@ body.woocommerce-checkout .woocommerce-form-coupon-toggle a {
     text-decoration: none;
     transition: color 0.2s;
 }
-body.woocommerce-checkout a:hover,
-body.woocommerce-checkout .woocommerce-form-coupon-toggle a:hover {
+.woocommerce-checkout .woocommerce a:hover,
+.woocommerce-checkout .woocommerce-form-coupon-toggle a:hover {
     color: #957B4D !important;
     text-decoration: underline;
 }
@@ -1860,4 +1854,53 @@ body.woocommerce-checkout {
 
 .woocommerce-Address{
     margin: 20px 0;
+}
+
+/* --- LOST PASSWORD PAGE --- */
+.woocommerce form.lost_reset_password {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.08);
+    max-width: 420px;
+    margin: 80px auto 40px auto;
+    padding: 40px 32px 32px 32px;
+    font-family: 'Verdana', sans-serif;
+    color: #1D1D1B;
+}
+
+.woocommerce form.lost_reset_password label,
+.woocommerce form.lost_reset_password input {
+    color: #1D1D1B;
+}
+
+.woocommerce form.lost_reset_password input.input-text {
+    background: #fff;
+    border: 1px solid #957B4D;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    font-size: 16px;
+}
+
+.woocommerce form.lost_reset_password button.button {
+    background: #957B4D;
+    color: #fff;
+    border-radius: 6px;
+    padding: 12px 32px;
+    font-weight: 700;
+    font-family: 'Priori Serif', serif;
+    font-size: 16px;
+    margin-top: 12px;
+    margin-bottom: 10px;
+    transition: background 0.2s;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.woocommerce form.lost_reset_password button.button:hover {
+    background: #7a6540;
+}
+
+.vog-account-content > p:first-child {
+    padding-bottom: 18px;
 }

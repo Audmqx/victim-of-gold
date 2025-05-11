@@ -270,3 +270,11 @@ input.mailpoet_text[style]::placeholder {
         line-height: 38px !important;
     }
 }
+
+#mailpoet_form_2 .mailpoet_validate_success {
+    color: #ffffff !important;
+}
+
+#mailpoet_form_2 .mailpoet_submit {
+    cursor: pointer !important;
+}
