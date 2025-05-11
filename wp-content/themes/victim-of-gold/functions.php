@@ -460,4 +460,17 @@ add_filter('gettext', 'vog_change_view_cart_button_text', 20, 3);
 /**
  * Include WooCommerce translations
  */
-require get_template_directory() . '/inc/woocommerce-translations.php'; 
+require get_template_directory() . '/inc/woocommerce-translations.php';
+
+// Notification MailPoet : envoi d'un email à chaque inscription via le formulaire n°2
+add_action('mailpoet_subscription_before_subscribe', function ($data, $segmentIds, $form) {
+    if ($form && method_exists($form, 'getId') && $form->getId() == 2) {
+        $to = 'jc@victimofgold.com'; // Remplace par l'adresse de notification souhaitée
+        $subject = 'Un nouvel message est arrivé depuis la page d\'accueil / maintenance';
+        $message = "Un nouvel message est arrivé depuis la page d'accueil / maintenance :\n";
+        foreach ($data as $key => $value) {
+            $message .= ucfirst($key) . " : " . $value . "\n";
+        }
+        wp_mail($to, $subject, $message);
+    }
+}, 10, 3); 
