@@ -491,4 +491,15 @@ function atelier_enqueue_styles() {
         wp_enqueue_style('atelier-css', get_template_directory_uri() . '/assets/css/atelier.css');
     }
 }
-add_action('wp_enqueue_scripts', 'atelier_enqueue_styles'); 
+add_action('wp_enqueue_scripts', 'atelier_enqueue_styles');
+
+add_action('wp_enqueue_scripts', function() {
+    if (function_exists('is_cart') && is_cart()) {
+        wp_enqueue_style(
+            'victim-of-gold-woocommerce-blocks',
+            get_template_directory_uri() . '/assets/css/woocommerce-blocks.css',
+            [],
+            '1.0.0'
+        );
+    }
+}); 
