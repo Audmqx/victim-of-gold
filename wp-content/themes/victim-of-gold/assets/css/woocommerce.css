@@ -193,6 +193,7 @@
     }
 
     .shop-hero__title {
+        width: 70% !important;
         font-size: 36px;
     }
 

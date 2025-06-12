@@ -16,7 +16,6 @@ get_header();
                 ?>
             </div>
         </div>
-        <div class="atelier-hero-overlay"></div>
     </section>
 
     <!-- SECTION 2 : Galerie Lightbox avec images dummy -->

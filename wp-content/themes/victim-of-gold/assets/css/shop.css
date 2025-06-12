@@ -180,6 +180,22 @@
     display: none !important;
 }
 
+@media (max-width: 480px) {
+    .products-grid,
+    .woocommerce ul.products {
+        grid-template-columns: 1fr;
+    }
+
+    .shop-hero__title {
+        width: 70% !important;
+        font-size: 36px;
+    }
+
+    .shop-hero__subtitle {
+        font-size: 16px;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 1440px) {
     .woocommerce ul.products {
