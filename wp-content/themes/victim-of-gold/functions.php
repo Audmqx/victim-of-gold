@@ -105,9 +105,9 @@ function victim_of_gold_scripts() {
     wp_enqueue_script('leaflet-js', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', array(), '1.9.4', false);
     
     wp_localize_script('leaflet-js', 'shopLocation', array(
-        'lat' => 43.5500,
-        'lng' => 7.0167,
-        'address' => '112 Allée des Tournesols, 06400 Cannes'
+        'lat' => 43.5518889,
+        'lng' => 7.0205556,
+        'address' => '9 rue des Serbes, 06400 Cannes'
     ));
     
     wp_enqueue_script('victim-of-gold-map', get_template_directory_uri() . '/js/map.js', array('leaflet-js'), '1.0.0', true);

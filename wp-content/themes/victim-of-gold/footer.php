@@ -19,7 +19,7 @@
 <!-- ADRESSE SECTION -->
 <section class="map-section">
     <div class="adresse-container">
-        <p class="adresse">112 Allée des Oliviers, 06400 Cannes</p>
+        <p class="adresse">9 rue des Serbes, 06400 Cannes</p>
     </div>
     
     <div class="map-container">
@@ -46,9 +46,9 @@
             <a href="/contact">Contact</a>
         </div>
         <div class="footer-contact">
-            <p>+33 (0)7 65 98 46 65</p>
+            <p>+33 (0)4 97 06 80 01</p>
             <p>contact@victimofgold.com</p>
-            <p>112 Allée des Oliviers, 06400 Cannes</p>
+            <p>9 rue des Serbes, 06400 Cannes</p>
         </div>
         <div class="footer-social">
             <h3>Suivez-nous sur les réseaux</h3>

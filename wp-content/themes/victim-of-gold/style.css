@@ -59,7 +59,7 @@ body.page-template-shop {
 
 /* Top Bar */
 .top-bar {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: black;
     width: 100%;
     position: fixed;
     top: 0;
