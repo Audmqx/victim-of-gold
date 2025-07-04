@@ -19,7 +19,7 @@ get_header();
     </section>
 
     <!-- SECTION 2 : Galerie Lightbox avec images dummy -->
-    <section class="atelier-gallery">
+    <section class="atelier-gallery" style="display: none;">
         <div class="container atelier-gallery-container">
             <div class="atelier-gallery-grid">
                 <?php

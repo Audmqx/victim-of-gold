@@ -2089,7 +2089,7 @@ a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .new
   .contact-right { order: 1; 
     display: flex;
     align-items: center;        padding: 0;}
-  .contact-container { flex-direction: column-reverse; }
+  .contact-container { flex-direction: column-reverse;padding-top: 81px; }
 
   .contact-infos {
     align-items: center;
