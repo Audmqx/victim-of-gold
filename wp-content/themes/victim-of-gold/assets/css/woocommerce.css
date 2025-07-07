@@ -1710,6 +1710,7 @@ body.woocommerce-checkout {
     border: 1px solid #4CAF50 !important;
     color: #4CAF50 !important;
     background: #f8fff8 !important;
+    justify-content: center !important;
 }
 .woocommerce .woocommerce-info {
     border: 1px solid #957B4D !important;

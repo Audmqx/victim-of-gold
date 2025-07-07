@@ -16,6 +16,8 @@ if (is_checkout()) {
     }
 } elseif (is_cart()) {
     // Ne pas utiliser les hooks before/after_main_content ici car ils sont déjà dans le shortcode
+    // Masquer les options de paiement et d'expédition dans le panier
+    remove_action('woocommerce_cart_collaterals', 'woocommerce_cart_totals', 10);
     echo do_shortcode('[woocommerce_cart]');
 } elseif (is_account_page()) {
     // Ne pas utiliser les hooks before/after_main_content ici car ils sont déjà dans le shortcode

@@ -502,4 +502,32 @@ add_action('wp_enqueue_scripts', function() {
             '1.0.0'
         );
     }
-}); 
+});
+
+// Masquer les options de paiement et d'expédition dans le panier
+function victim_of_gold_hide_cart_payment_options() {
+    if (is_cart()) {
+        // Masquer les totaux du panier (qui incluent les options de paiement)
+        remove_action('woocommerce_cart_collaterals', 'woocommerce_cart_totals', 10);
+        
+        // Masquer les champs de coupon dans le panier
+        remove_action('woocommerce_cart_collaterals', 'woocommerce_cross_sell_display');
+        
+        // Masquer les options d'expédition dans le panier
+        remove_action('woocommerce_cart_collaterals', 'woocommerce_shipping_calculator', 5);
+    }
+}
+add_action('wp', 'victim_of_gold_hide_cart_payment_options');
+
+// S'assurer que le bouton "Proceed to checkout" est bien visible dans le panier
+function victim_of_gold_ensure_checkout_button() {
+    if (is_cart()) {
+        // Ajouter un bouton de checkout personnalisé si nécessaire
+        add_action('woocommerce_after_cart_table', function() {
+            echo '<div class="cart-checkout-button-wrapper">';
+            echo '<a href="' . esc_url(wc_get_checkout_url()) . '" class="button checkout-button">' . esc_html__('Paiement', 'victim-of-gold') . '</a>';
+            echo '</div>';
+        });
+    }
+}
+add_action('wp', 'victim_of_gold_ensure_checkout_button'); 
