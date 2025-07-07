@@ -7,6 +7,11 @@ defined('ABSPATH') || exit;
 
 do_action('woocommerce_before_cart'); ?>
 
+<!-- Image Mon Panier -->
+<div class="cart-title-image" style="text-align:center; margin-bottom:40px;">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Mon-panier.svg" alt="Mon panier" width="177" height="86" style="max-width:177px; height:auto;" />
+</div>
+
 <form class="woocommerce-cart-form" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
     <?php do_action('woocommerce_before_cart_table'); ?>
 
