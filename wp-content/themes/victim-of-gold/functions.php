@@ -508,7 +508,7 @@ add_action('wp_enqueue_scripts', function() {
 function victim_of_gold_hide_cart_payment_options() {
     if (is_cart()) {
         // Masquer les totaux du panier (qui incluent les options de paiement)
-        remove_action('woocommerce_cart_collaterals', 'woocommerce_cart_totals', 10);
+        // remove_action('woocommerce_cart_collaterals', 'woocommerce_cart_totals', 10);
         
         // Masquer les champs de coupon dans le panier
         remove_action('woocommerce_cart_collaterals', 'woocommerce_cross_sell_display');
@@ -530,4 +530,7 @@ function victim_of_gold_ensure_checkout_button() {
         });
     }
 }
-add_action('wp', 'victim_of_gold_ensure_checkout_button'); 
+add_action('wp', 'victim_of_gold_ensure_checkout_button');
+
+// Désactiver les boutons de paiement express (PayPal, Apple Pay, etc.) sur la page panier
+add_filter('woocommerce_cart_checkout_payment_buttons_enabled', '__return_false'); 
