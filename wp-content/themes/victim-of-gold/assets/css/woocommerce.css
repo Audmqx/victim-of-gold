@@ -1931,3 +1931,16 @@ body.woocommerce-checkout {
     background: #7a6540;
     color: #fff;
 }
+
+/* Masquer les boutons de paiement rapide sur le panier */
+.woocommerce-cart .wc-proceed-to-checkout,
+.woocommerce-cart .express-checkout-buttons,
+.woocommerce-cart .paypal-buttons,
+.woocommerce-cart .woocommerce-cart-payments,
+.woocommerce-cart .woocommerce-cart__payment-methods,
+.woocommerce-cart .wc-block-components-checkout-express-payment,
+.woocommerce-cart .wc-block-components-checkout-express-payment-request-button,
+.woocommerce-cart .wc-block-components-checkout-express-payment-request-apple-pay-button,
+.woocommerce-cart .wc-block-components-checkout-express-payment-request-google-pay-button {
+    display: none !important;
+}
