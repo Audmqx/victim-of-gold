@@ -1001,6 +1001,7 @@ nav.menu {
     line-height: 36px;
     color: #fff;
     margin-bottom: 18px;
+    font-weight: 700;
     letter-spacing: 1%;
 }
 
@@ -2079,7 +2080,7 @@ a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .new
     width: 100%;
   }
   .contact-image-bg img {
-    width: 220px;
+    width: 160px;
     margin-bottom: 30px;
   }
 }
