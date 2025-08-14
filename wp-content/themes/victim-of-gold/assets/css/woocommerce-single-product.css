@@ -285,11 +285,8 @@
 
 /* Single variation wrapper */
 .single_variation {
-    margin: 20px 0 0 0 !important;
-    padding: 20px !important;
-    background-color: #F8F3EC !important;
-    border-radius: 12px !important;
-    border: 1px solid #E5E5E5 !important;
+    margin: 20px 0px;
+
 }
 
 .single_variation .woocommerce-variation-price {
