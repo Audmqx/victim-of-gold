@@ -274,12 +274,9 @@
     color: #957B4D !important;
     background: none !important;
     border: none !important;
-    padding: 8px 0 !important;
-    margin: 0 !important;
     cursor: pointer !important;
     text-decoration: underline !important;
     transition: color 0.3s ease !important;
-    display: inline-block !important;
 }
 
 .reset_variations:hover {
@@ -347,26 +344,26 @@
         padding: 0 0 8px 0 !important;
         min-width: 100px !important;
     }
-    
+
     .variations td.label label {
         font-size: 15px !important;
     }
-    
+
     .variations td.value {
         padding: 0 0 15px 0 !important;
     }
-    
+
     .variations select {
         font-size: 13px !important;
         padding: 10px 14px !important;
         max-width: 100% !important;
     }
-    
+
     .single_variation {
         margin: 15px 0 0 0 !important;
         padding: 15px !important;
     }
-    
+
     .single_variation .woocommerce-variation-price .price {
         font-size: 20px !important;
     }
@@ -397,7 +394,7 @@
     .vog-product-container {
         flex-direction: column;
     }
-    
+
     .vog-product-gallery,
     .vog-product-info {
         flex: 0 0 100%;
@@ -888,4 +885,4 @@
         padding: 12px 20px !important;
         font-size: 11px !important;
     }
-} 
+}
