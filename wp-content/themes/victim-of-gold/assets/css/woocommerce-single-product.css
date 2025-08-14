@@ -183,6 +183,195 @@
     display: block;
 }
 
+/* WooCommerce Variations Styles */
+.variations_form {
+    margin: 0 0 30px !important;
+}
+
+.variations {
+    margin: 0 0 20px !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.variations tr {
+    border: none !important;
+    background: none !important;
+}
+
+.variations td {
+    border: none !important;
+    padding: 0 !important;
+    background: none !important;
+    vertical-align: top !important;
+}
+
+.variations td.label {
+    padding: 0 0 12px 0 !important;
+    width: auto !important;
+    min-width: 120px !important;
+}
+
+.variations td.label label {
+    font-family: 'Priori Serif OT', serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    display: block !important;
+    line-height: 1.4 !important;
+}
+
+.variations td.value {
+    padding: 0 0 20px 0 !important;
+    width: 100% !important;
+}
+
+.variations select {
+    font-family: 'Verdana', sans-serif !important;
+    font-size: 14px !important;
+    color: #000000 !important;
+    background-color: #FFFFFF !important;
+    border: 2px solid #E5E5E5 !important;
+    border-radius: 8px !important;
+    padding: 12px 16px !important;
+    width: 100% !important;
+    max-width: 300px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23957B4D' d='M1.41 0L6 4.59L10.59 0L12 1.41L6 7.41L0 1.41L1.41 0Z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 16px center !important;
+    background-size: 12px !important;
+}
+
+.variations select:hover {
+    border-color: #957B4D !important;
+    box-shadow: 0 2px 8px rgba(149, 123, 77, 0.1) !important;
+}
+
+.variations select:focus {
+    outline: none !important;
+    border-color: #957B4D !important;
+    box-shadow: 0 0 0 3px rgba(149, 123, 77, 0.1) !important;
+}
+
+.variations select option {
+    font-family: 'Verdana', sans-serif !important;
+    font-size: 14px !important;
+    color: #000000 !important;
+    background-color: #FFFFFF !important;
+    padding: 8px 12px !important;
+}
+
+/* Reset button styles */
+.reset_variations {
+    font-family: 'Verdana', sans-serif !important;
+    font-size: 12px !important;
+    color: #957B4D !important;
+    background: none !important;
+    border: none !important;
+    padding: 8px 0 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    text-decoration: underline !important;
+    transition: color 0.3s ease !important;
+    display: inline-block !important;
+}
+
+.reset_variations:hover {
+    color: #7B663F !important;
+}
+
+/* Single variation wrapper */
+.single_variation {
+    margin: 20px 0 0 0 !important;
+    padding: 20px !important;
+    background-color: #F8F3EC !important;
+    border-radius: 12px !important;
+    border: 1px solid #E5E5E5 !important;
+}
+
+.single_variation .woocommerce-variation-price {
+    margin: 0 0 15px 0 !important;
+}
+
+.single_variation .woocommerce-variation-price .price {
+    font-family: 'Priori Serif OT', serif !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: #000000 !important;
+    margin: 0 !important;
+}
+
+.single_variation .woocommerce-variation-availability {
+    margin: 0 !important;
+}
+
+.single_variation .woocommerce-variation-availability .stock {
+    font-family: 'Verdana', sans-serif !important;
+    font-size: 14px !important;
+    color: #666666 !important;
+    margin: 0 !important;
+}
+
+.single_variation .woocommerce-variation-description {
+    margin: 15px 0 0 0 !important;
+}
+
+.single_variation .woocommerce-variation-description p {
+    font-family: 'Verdana', sans-serif !important;
+    font-size: 14px !important;
+    color: #666666 !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+}
+
+/* Variation stock status */
+.stock.in-stock {
+    color: #7ad03a !important;
+    font-weight: 600 !important;
+}
+
+.stock.out-of-stock {
+    color: #a00 !important;
+    font-weight: 600 !important;
+}
+
+/* Responsive variations */
+@media (max-width: 768px) {
+    .variations td.label {
+        padding: 0 0 8px 0 !important;
+        min-width: 100px !important;
+    }
+    
+    .variations td.label label {
+        font-size: 15px !important;
+    }
+    
+    .variations td.value {
+        padding: 0 0 15px 0 !important;
+    }
+    
+    .variations select {
+        font-size: 13px !important;
+        padding: 10px 14px !important;
+        max-width: 100% !important;
+    }
+    
+    .single_variation {
+        margin: 15px 0 0 0 !important;
+        padding: 15px !important;
+    }
+    
+    .single_variation .woocommerce-variation-price .price {
+        font-size: 20px !important;
+    }
+}
+
 /* Hide quantity input */
 .quantity {
     display: none !important;
@@ -497,87 +686,148 @@
     }
 }
 
-/* WooCommerce Messages */
+/* WooCommerce Messages - Design élégant selon la charte graphique */
 .woocommerce-notices-wrapper {
     position: fixed;
     top: 120px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 500px;
+    max-width: 480px;
     z-index: 9999;
     padding: 0 20px;
 }
 
 .woocommerce-message {
-    background: rgba(255, 255, 255, 0.98) !important;
-    border: 1px solid #957B4D !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-    padding: 20px 30px !important;
+    background: linear-gradient(135deg, #F8F3EC 0%, #FFFFFF 100%) !important;
+    border: 2px solid #957B4D !important;
+    box-shadow: 0 8px 32px rgba(149, 123, 77, 0.15) !important;
+    padding: 24px 32px !important;
     margin-bottom: 20px !important;
-    font-family: 'Verdana', sans-serif !important;
-    font-size: 14px !important;
-    line-height: 1.4 !important;
+    font-family: 'Priori Serif OT', serif !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
     flex-direction: row-reverse !important;
-    border-radius: 4px !important;
-    color: #000000 !important;
+    border-radius: 16px !important;
+    color: #1D1D1B !important;
     position: relative;
     transform: none !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
 }
 
 .woocommerce-message::before {
     display: none !important;
 }
 
-.woocommerce-message .button {
-    background-color: #957B4D !important;
+/* Icône de succès personnalisée */
+.woocommerce-message::after {
+    content: "✓" !important;
+    position: absolute !important;
+    left: 24px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: #957B4D !important;
     color: #FFFFFF !important;
-    padding: 10px 24px !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    font-family: 'Verdana', sans-serif !important;
+}
+
+.woocommerce-message .button {
+    background: linear-gradient(135deg, #957B4D 0%, #7B663F 100%) !important;
+    color: #FFFFFF !important;
+    padding: 12px 28px !important;
     border-radius: 50px !important;
     font-family: 'Verdana', sans-serif !important;
-    font-size: 12px !important;
+    font-size: 13px !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.05em !important;
+    letter-spacing: 0.08em !important;
     float: none !important;
     order: 2 !important;
-    margin-left: 20px !important;
+    margin-left: 24px !important;
     line-height: 1.4 !important;
-    font-weight: 600 !important;
-    transition: all 0.3s ease !important;
+    font-weight: 700 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     border: none !important;
     white-space: nowrap !important;
+    box-shadow: 0 4px 12px rgba(149, 123, 77, 0.2) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.woocommerce-message .button::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+    transition: left 0.5s !important;
 }
 
 .woocommerce-message .button:hover {
-    background-color: #7B663F !important;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(149, 123, 77, 0.2);
+    background: linear-gradient(135deg, #7B663F 0%, #957B4D 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 24px rgba(149, 123, 77, 0.3) !important;
 }
 
-/* Animation pour les messages */
+.woocommerce-message .button:hover::before {
+    left: 100% !important;
+}
+
+.woocommerce-message .button:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 4px 12px rgba(149, 123, 77, 0.2) !important;
+}
+
+/* Animation élégante pour les messages */
 @keyframes slideInDown {
     from {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(-30px) scale(0.95);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
 
 .woocommerce-message {
-    animation: slideInDown 0.4s ease-out forwards;
+    animation: slideInDown 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Effet de brillance au survol */
+.woocommerce-message:hover {
+    box-shadow: 0 12px 40px rgba(149, 123, 77, 0.2) !important;
+    transform: translateY(-1px) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
     .woocommerce-notices-wrapper {
         top: 70px;
-        padding: 0;
+        padding: 0 15px;
         width: 100%;
         max-width: 100%;
         left: 0;
@@ -586,21 +836,56 @@
 
     .woocommerce-message {
         margin: 0 !important;
-        border-radius: 0 !important;
-        border-left: none !important;
-        border-right: none !important;
-        border-top: none !important;
-        padding: 15px 20px !important;
-        font-size: 13px !important;
+        border-radius: 12px !important;
+        border: 2px solid #957B4D !important;
+        padding: 20px 24px !important;
+        font-size: 14px !important;
         flex-direction: column !important;
         text-align: center !important;
-        gap: 12px !important;
+        gap: 16px !important;
         transform: none !important;
+        background: linear-gradient(135deg, #F8F3EC 0%, #FFFFFF 100%) !important;
+        box-shadow: 0 8px 24px rgba(149, 123, 77, 0.15) !important;
+    }
+
+    .woocommerce-message::after {
+        position: static !important;
+        transform: none !important;
+        margin: 0 auto 8px auto !important;
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 16px !important;
     }
 
     .woocommerce-message .button {
         margin-left: 0 !important;
         width: 100% !important;
         order: 2 !important;
+        padding: 14px 24px !important;
+        font-size: 12px !important;
+        border-radius: 50px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .woocommerce-notices-wrapper {
+        padding: 0 10px;
+    }
+
+    .woocommerce-message {
+        padding: 16px 20px !important;
+        font-size: 13px !important;
+        gap: 12px !important;
+    }
+
+    .woocommerce-message::after {
+        width: 24px !important;
+        height: 24px !important;
+        font-size: 14px !important;
+    }
+
+    .woocommerce-message .button {
+        padding: 12px 20px !important;
+        font-size: 11px !important;
     }
 } 

@@ -7,12 +7,7 @@
 }
 
 /* Override WooCommerce default image styles */
-.woocommerce-shop .custom-logo,
-.woocommerce-shop .site-logo img {
-    height: 44px !important;
-    width: auto !important;
-    max-width: none !important;
-}
+/* Logo size consistency maintained across all pages */
 
 /* Shop Hero Section */
 .shop-hero {

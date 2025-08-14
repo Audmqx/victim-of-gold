@@ -15,26 +15,26 @@
         <div class="menu-container">
             <div class="logo-container">
                 <a href="<?php echo esc_url(home_url('/')); ?>" class="custom-logo-link">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Logo.svg" 
-                         alt="<?php echo esc_attr(get_bloginfo('name')); ?>" 
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Logo.svg"
+                         alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
                          class="custom-logo">
                 </a>
             </div>
-            
+
             <nav class="menu" role="navigation" aria-label="Menu principal">
                 <?php
-                wp_nav_menu(array(
+                wp_nav_menu([
                     'theme_location' => 'primary',
                     'menu_class' => 'menu',
                     'container' => false,
                     'items_wrap' => '<ul class="menu">%3$s</ul>',
                     'walker' => new VOG_Menu_Walker()
-                ));
-                ?>
+                ]);
+?>
             </nav>
 
             <div class="icons-container">
-            
+
                 <div class="profile-icon">
                     <a href="<?php echo esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))); ?>" title="<?php esc_attr_e('My Account', 'victim-of-gold'); ?>">
                         <?php include get_template_directory() . '/assets/images/profil.svg'; ?>
@@ -62,8 +62,10 @@
 
 <?php
 // Custom Walker pour le menu
-class VOG_Menu_Walker extends Walker_Nav_Menu {
-    function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
+class VOG_Menu_Walker extends Walker_Nav_Menu
+{
+    public function start_el(&$output, $item, $depth = 0, $args = [], $id = 0)
+    {
         $output .= '<li>';
         $output .= sprintf(
             '<a href="%s" data-text="%s">%s</a>',
@@ -86,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const isOpen = hamburger.classList.toggle('active');
         menu.classList.toggle('active');
         hamburger.setAttribute('aria-expanded', isOpen);
-        
+
         if (isOpen) {
             scrollPosition = window.pageYOffset;
             body.classList.add('menu-open');
@@ -131,4 +133,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-</script> 
+</script>
