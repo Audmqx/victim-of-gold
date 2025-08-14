@@ -2106,3 +2106,7 @@ a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .new
 .single_variation{
     display: none;
 }
+
+.single_variation_wrap {
+    display: none;
+}
