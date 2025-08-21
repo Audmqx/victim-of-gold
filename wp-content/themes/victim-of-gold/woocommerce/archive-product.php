@@ -20,37 +20,57 @@ get_header('shop');
     <div class="shop-content">
         <div class="shop-products">
             <?php
-            // Récupérer tous les produits avec un ordre personnalisé
-            $args = [
-                'post_type' => 'product',
-                'post_status' => 'publish',
-                'posts_per_page' => -1, // Afficher tous les produits (-1 = pas de limite)
-                'orderby' => 'menu_order', // Ordre par menu_order (ordre personnalisé)
-                'order' => 'ASC', // Ordre croissant
-                'meta_query' => [
-                    [
-                        'key' => '_visibility',
-                        'value' => ['catalog', 'visible'],
-                        'compare' => 'IN'
-                    ]
-                ]
-            ];
+            // Récupérer les produits dans l'ordre spécifique des IDs
+            $product_ids = [217, 122, 116, 119, 125, 129, 138, 135, 136, 137];
 
-$products_query = new WP_Query($args);
+// Première requête : produits spécifiques dans l'ordre défini
+$args_specific = [
+    'post_type' => 'product',
+    'post_status' => 'publish',
+    'posts_per_page' => -1,
+    'post__in' => $product_ids,
+    'orderby' => 'post__in', // Respecte l'ordre du tableau post__in
+];
 
-if ($products_query->have_posts()) {
+$products_specific = new WP_Query($args_specific);
+
+// Deuxième requête : tous les autres produits
+$args_others = [
+    'post_type' => 'product',
+    'post_status' => 'publish',
+    'posts_per_page' => -1,
+    'post__not_in' => $product_ids, // Exclut les produits déjà affichés
+    'orderby' => 'menu_order',
+    'order' => 'ASC',
+];
+
+$products_others = new WP_Query($args_others);
+
+// Afficher les produits
+if ($products_specific->have_posts() || $products_others->have_posts()) {
     woocommerce_product_loop_start();
 
-    while ($products_query->have_posts()) {
-        $products_query->the_post();
-        do_action('woocommerce_shop_loop');
-        wc_get_template_part('content', 'product');
+    // 1. Afficher d'abord les produits spécifiques
+    if ($products_specific->have_posts()) {
+        while ($products_specific->have_posts()) {
+            $products_specific->the_post();
+            do_action('woocommerce_shop_loop');
+            wc_get_template_part('content', 'product');
+        }
+        wp_reset_postdata();
+    }
+
+    // 2. Puis afficher tous les autres produits
+    if ($products_others->have_posts()) {
+        while ($products_others->have_posts()) {
+            $products_others->the_post();
+            do_action('woocommerce_shop_loop');
+            wc_get_template_part('content', 'product');
+        }
+        wp_reset_postdata();
     }
 
     woocommerce_product_loop_end();
-
-    // Réinitialiser les données de post
-    wp_reset_postdata();
 
     do_action('woocommerce_after_shop_loop');
 } else {
