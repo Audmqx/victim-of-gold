@@ -3,7 +3,7 @@
 <main id="main" class="site-main">
     <!-- HERO SECTION -->
     <section class="hero">
-        <video class="hero-video" autoplay muted loop playsinline preload="metadata" 
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata"
         webkit-playsinline x-webkit-airplay="allow">
             <source src="<?php echo get_template_directory_uri(); ?>/assets/images/acceuil-short.mp4" type="video/mp4">
             Votre navigateur ne supporte pas la lecture de vidéos.
@@ -13,19 +13,28 @@
         </div>
     </section>
 
+     <!-- ABOUT SECTION -->
+        <section class="about-section">
+        <div class="about-content">
+            <p class="about-text">
+                Victim of Gold est un concept store qui allie l'or pur 24 carats et un savoir-faire unique au monde : Atelier, Boutique & Café pour découvrir et vivre une expérience en or.
+            </p>
+        </div>
+    </section>
+
     <!-- NEWS / ACTUALITÉS SECTION alternée -->
     <section class="news-section">
         <div class="news-alternating-list">
             <?php
-            $news_query = new WP_Query(array(
+            $news_query = new WP_Query([
                 'post_type' => 'post',
                 'posts_per_page' => 3
-            ));
-            $i = 0;
-            if ($news_query->have_posts()) :
-                while ($news_query->have_posts()) : $news_query->the_post();
-                    $is_even = $i % 2 === 1;
-            ?>
+            ]);
+$i = 0;
+if ($news_query->have_posts()) :
+    while ($news_query->have_posts()) : $news_query->the_post();
+        $is_even = $i % 2 === 1;
+        ?>
                 <div class="news-alternating-item <?php echo $is_even ? 'reverse' : ''; ?>">
                     <div class="news-alternating-image">
                         <?php if (has_post_thumbnail()) : ?>
@@ -38,13 +47,17 @@
                         <h3 class="news-alternating-title"><?php the_title(); ?></h3>
                         <div class="news-alternating-meta">
                             <span><?php echo get_the_date('d.m.Y'); ?></span>
-                            <?php $category = get_the_category(); if ($category) { echo ' &mdash; ' . esc_html($category[0]->name); } ?>
+                            <?php $category = get_the_category();
+        if ($category) {
+            echo ' &mdash; ' . esc_html($category[0]->name);
+        } ?>
                         </div>
                         <div class="news-alternating-excerpt"><?php echo get_the_excerpt(); ?></div>
                         <a href="<?php the_permalink(); ?>" class="news-alternating-btn">Lire</a>
                     </div>
                 </div>
-            <?php $i++; endwhile; wp_reset_postdata(); endif; ?>
+            <?php $i++; endwhile;
+wp_reset_postdata(); endif; ?>
         </div>
     </section>
 </main>
@@ -60,4 +73,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<?php get_footer(); ?> 
+<?php get_footer(); ?>

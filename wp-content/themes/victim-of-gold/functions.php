@@ -519,6 +519,17 @@ function atelier_enqueue_styles()
 }
 add_action('wp_enqueue_scripts', 'atelier_enqueue_styles');
 
+// Enqueue le JavaScript d'optimisation pour la page Atelier
+function atelier_enqueue_optimization()
+{
+    if (is_page('atelier')) {
+        wp_enqueue_script('atelier-optimization', get_template_directory_uri() . '/assets/js/atelier-optimization.js', [], '1.0.0', true);
+    }
+}
+add_action('wp_enqueue_scripts', 'atelier_enqueue_optimization');
+
+
+
 add_action('wp_enqueue_scripts', function () {
     if (function_exists('is_cart') && is_cart()) {
         wp_enqueue_style(

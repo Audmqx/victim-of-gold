@@ -9,8 +9,7 @@
             </div>
             <div class="horaire-item">
                 <h3>HORAIRES CAFÉ</h3>
-                <p>Du Lundi au Dimanche
-09.00 - 23.00</p>
+                <p>Opening Soon</p>
             </div>
         </div>
     </div>
@@ -21,7 +20,7 @@
     <div class="adresse-container">
         <p class="adresse">9 rue des Serbes, 06400 Cannes</p>
     </div>
-    
+
     <div class="map-container">
         <div id="google-map"></div>
         <div class="map-overlay"></div>
@@ -108,4 +107,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <?php wp_footer(); ?>
 </body>
-</html> 
+</html>

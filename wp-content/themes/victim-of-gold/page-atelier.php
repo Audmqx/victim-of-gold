@@ -18,14 +18,25 @@ get_header();
         </div>
     </section>
 
-    <!-- SECTION 2 : Galerie Lightbox avec images dummy -->
+    <!-- SECTION 2 : Galerie Lightbox avec images WordPress optimisées -->
     <section class="atelier-gallery">
         <div class="container atelier-gallery-container">
             <div class="atelier-gallery-grid">
                 <?php
-for ($i = 1; $i <= 6; $i++) {
-    $image_url = get_template_directory_uri() . '/assets/images/atelier-' . $i . '.jpg';
-    echo '<a href="' . $image_url . '" data-lightbox="atelier-gallery"><img src="' . $image_url . '" alt="Atelier ' . $i . '"></a>';
+                // Images spécifiques de la galerie atelier
+                $atelier_images = [
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-1-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-2-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-3-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-4-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-5-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-6-scaled.jpg'
+                ];
+
+foreach ($atelier_images as $image_url) {
+    echo '<a href="' . $image_url . '" data-lightbox="atelier-gallery">';
+    echo '<img src="' . $image_url . '" alt="Atelier" loading="lazy">';
+    echo '</a>';
 }
 ?>
             </div>
