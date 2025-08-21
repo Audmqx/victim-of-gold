@@ -47,6 +47,7 @@
 
 .atelier-hero-text p{
     max-width: 400px;
+    font-weight: bold;
 }
 .atelier-gallery {
     padding: 40px 0;
