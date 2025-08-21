@@ -109,6 +109,10 @@
 }
 
 /* Products Grid */
+
+.woocommerce-shop .woocommerce-pagination {
+    display: none !important;
+}
 .woocommerce ul.products {
     display: flex !important;
     flex-wrap: wrap !important;
