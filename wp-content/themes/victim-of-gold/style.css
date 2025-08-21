@@ -94,7 +94,7 @@ body.page-template-shop {
 }
 
 .custom-logo {
-    height: 44px;
+    height: 44px !important;
     width: auto;
     display: block;
     z-index: 10;
