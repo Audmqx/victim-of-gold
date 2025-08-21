@@ -19,7 +19,7 @@ get_header();
                     </div>
                     <div class="contact-info">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icone-tel.svg" alt="Instagram" />
-                        <span>@vog.cannes</span>
+                        <a href="https://instagram.com/vog.cannes" target="_blank">@vog.cannes</a>
                     </div>
                 </div>
             </div>
