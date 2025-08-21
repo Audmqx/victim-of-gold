@@ -141,7 +141,7 @@
 
 .woocommerce ul.products li.product a img {
     width: 100% !important;
-    height: 600px !important;
+    height: 430px !important;
     object-fit: cover !important;
     margin: 0 0 21px 0 !important;
 }
@@ -204,8 +204,8 @@
         padding: 30px !important;
         gap: 30px !important;
     }
-    
-  
+
+
 }
 
 @media (max-width: 768px) {
@@ -429,4 +429,4 @@
     .cart_totals {
         padding: 1em;
     }
-} 
+}

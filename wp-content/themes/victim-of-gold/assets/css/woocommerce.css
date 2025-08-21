@@ -143,6 +143,7 @@
 .woocommerce nav.woocommerce-pagination {
     margin-top: 60px;
     margin-bottom: 0;
+    display: none;
 }
 
 .woocommerce nav.woocommerce-pagination ul {
@@ -1885,8 +1886,8 @@ body.woocommerce-checkout {
 .woocommerce-account .woocommerce-MyAccount-content form.woocommerce-address-edit .form-row .required {
     color: #b81c23;
 }
-.woocommerce-account .woocommerce-MyAccount-content .woocommerce-error, 
-.woocommerce-account .woocommerce-MyAccount-content .woocommerce-message, 
+.woocommerce-account .woocommerce-MyAccount-content .woocommerce-error,
+.woocommerce-account .woocommerce-MyAccount-content .woocommerce-message,
 .woocommerce-account .woocommerce-MyAccount-content .woocommerce-info {
     margin-top: 18px !important;
     margin-bottom: 18px !important;

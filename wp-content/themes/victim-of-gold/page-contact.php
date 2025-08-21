@@ -11,7 +11,7 @@ get_header();
                 <div class="contact-infos">
                     <div class="contact-info">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icone-email.svg" alt="Email" />
-                        <span>contact@victimofgold.com</span>
+                        <span>cannes@victimofgold.com</span>
                     </div>
                     <div class="contact-info">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icone instagram.svg" alt="Téléphone" />
@@ -32,4 +32,4 @@ get_header();
         </div>
     </section>
 </main>
-<?php get_footer(); ?> 
+<?php get_footer(); ?>

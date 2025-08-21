@@ -367,9 +367,6 @@ nav.menu {
         margin-right: 20px;
     }
 
-    .menu.active ~ .icons-container {
-        gap: 32px;
-    }
 
     .cart-icon, .profile-icon {
         height: 24px;
