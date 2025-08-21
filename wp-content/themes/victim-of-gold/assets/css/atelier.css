@@ -2,7 +2,7 @@
 
 .atelier-hero-bg {
     position: relative;
-    background: url('../images/atelier.jpg') center/cover no-repeat;
+    background: url('../images/atelier-bg.jpg') center/cover no-repeat;
     min-height: 100vh; /* Pleine hauteur d'écran */
     width: 100%;
     display: flex;
