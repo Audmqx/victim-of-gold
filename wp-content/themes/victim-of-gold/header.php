@@ -34,7 +34,6 @@
             </nav>
 
             <div class="icons-container">
-
                 <div class="profile-icon">
                     <a href="<?php echo esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))); ?>" title="<?php esc_attr_e('My Account', 'victim-of-gold'); ?>">
                         <?php include get_template_directory() . '/assets/images/profil.svg'; ?>
