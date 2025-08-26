@@ -2169,6 +2169,7 @@ a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .new
     .about-section {
         background-attachment: scroll;
         min-height: 50vh;
+        background-image: url(./assets/images/clef-mobile.jpg) !important;
     }
 
     .about-content {
