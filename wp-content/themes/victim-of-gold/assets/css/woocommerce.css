@@ -176,6 +176,7 @@
 @media (max-width: 768px) {
     .shop-hero {
         height: 70vh;
+        background-image: url('../images/boutique-tel.jpg');
     }
 
     .shop-hero__title {

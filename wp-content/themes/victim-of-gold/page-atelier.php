@@ -58,15 +58,25 @@ function get_mobile_image_order($images)
                     'https://victimofgold.com/wp-content/uploads/2025/08/atelier-1-scaled.jpg',
                     'https://victimofgold.com/wp-content/uploads/2025/08/atelier-2-scaled.jpg',
                     'https://victimofgold.com/wp-content/uploads/2025/08/atelier-3-scaled.jpg',
-                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-4-scaled.jpg',
-                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-5-scaled.jpg',
-                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-6-scaled.jpg'
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-7-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-8-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-9-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-10-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-11-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-12-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-13-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-14-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-15-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-16-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-17-scaled.jpg',
+                    'https://victimofgold.com/wp-content/uploads/2025/08/atelier-18-scaled.jpg',
+
                 ];
 
 // Réorganiser les images si on est sur mobile
-if (is_mobile_device()) {
-    $atelier_images = get_mobile_image_order($atelier_images);
-}
+// if (is_mobile_device()) {
+//     $atelier_images = get_mobile_image_order($atelier_images);
+// }
 
 foreach ($atelier_images as $image_url) {
     echo '<a href="' . $image_url . '" data-lightbox="atelier-gallery">';
