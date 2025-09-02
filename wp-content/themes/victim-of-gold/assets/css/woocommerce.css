@@ -177,6 +177,8 @@
     .shop-hero {
         height: 70vh;
         background-image: url('../images/boutique-tel.jpg');
+        height: 200px !important;
+
     }
 
     .shop-hero__title {
