@@ -607,3 +607,51 @@ function victim_of_gold_custom_jetpack_og_tags($tags)
     return $tags;
 }
 add_filter('jetpack_open_graph_tags', 'victim_of_gold_custom_jetpack_og_tags');
+
+/**
+ * Gérer correctement les erreurs 404 et éviter les redirections incorrectes
+ */
+function victim_of_gold_handle_404_redirects()
+{
+    // Vérifier si c'est une erreur 404
+    if (is_404()) {
+        // Empêcher les redirections automatiques vers d'autres pages
+        remove_action('template_redirect', 'wp_redirect_admin_locations');
+        
+        // S'assurer que la page 404 est bien affichée
+        status_header(404);
+        nocache_headers();
+    }
+}
+add_action('template_redirect', 'victim_of_gold_handle_404_redirects', 1);
+
+/**
+ * Désactiver les redirections automatiques de Jetpack qui pourraient causer des problèmes
+ */
+function victim_of_gold_disable_jetpack_redirects()
+{
+    // Désactiver les redirections automatiques de Jetpack
+    if (class_exists('Jetpack')) {
+        remove_action('template_redirect', ['Jetpack', 'wp_redirect_admin_locations']);
+    }
+}
+add_action('init', 'victim_of_gold_disable_jetpack_redirects');
+
+/**
+ * Forcer l'affichage de la page 404 pour les produits supprimés
+ */
+function victim_of_gold_force_404_for_deleted_products()
+{
+    global $wp_query;
+    
+    // Vérifier si on est sur une page produit qui n'existe plus
+    if (is_singular('product')) {
+        $product = wc_get_product(get_the_ID());
+        if (!$product || !$product->exists()) {
+            $wp_query->set_404();
+            status_header(404);
+            nocache_headers();
+        }
+    }
+}
+add_action('template_redirect', 'victim_of_gold_force_404_for_deleted_products', 5);
