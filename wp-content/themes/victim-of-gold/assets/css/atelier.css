@@ -22,13 +22,14 @@
     padding: 60px 0;
     gap: 60px;
     flex-direction: column;
+
 }
 .atelier-hero-graphic {
     display: flex;
         align-items: center;
         justify-content: flex-start;
         width: 50%;
-        padding-left: 3%;
+        padding-left: 113px;
 }
 .atelier-hero-graphic img {
     max-width: 350px;
