@@ -76,8 +76,8 @@
     }
     .atelier-hero-graphic {
         justify-content: center;
-        width: 55% !important;
-        margin-left: 10%;
+        width: 80% !important;
+        margin-left: -14%;
     }
     .atelier-hero-text {
         max-width: 90vw;
