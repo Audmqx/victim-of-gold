@@ -1260,7 +1260,7 @@ a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .new
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: stretch;
     gap: 196px;
 }
 
@@ -1900,6 +1900,12 @@ a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .new
   padding: 0;
 }
 
+.opening-soon{
+    position: relative;
+    top: -173px;
+
+}
+
 .contact-container {
   display: flex;
   flex-direction: row;
@@ -1909,6 +1915,7 @@ a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .new
   width: 100%;
   max-width: 1200px;
   padding: 100px 0;
+  margin-top: 150px;
 }
 
 .contact-left {
@@ -2100,7 +2107,7 @@ a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .new
   .contact-right { order: 1;
     display: flex;
     align-items: center;        padding: 0;}
-  .contact-container { flex-direction: column-reverse;padding-top: 81px; }
+  .contact-container { flex-direction: column-reverse;padding-top: 81px;   margin-top: 30px; }
 
   .contact-infos {
     align-items: center;
