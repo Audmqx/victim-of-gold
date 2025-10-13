@@ -1903,7 +1903,6 @@ a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .new
 .opening-soon{
     position: relative;
     top: -173px;
-
 }
 
 .contact-container {
@@ -1993,6 +1992,11 @@ a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .new
   .contact-left {
     align-items: center;
   }
+
+  .opening-soon{
+    position: relative;
+    top: 27px;
+}
 }
 
 /* === Contact Form Custom (MailPoet) === */
