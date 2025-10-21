@@ -1901,11 +1901,14 @@ a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .new
 }
 
 .opening-soon{
-    display: block;
+    position: relative;
+    top: 27px;
 }
 
+
 .opening-soon-mobile{
-    display:block;
+
+    display: none;
 }
 
 .contact-container {
@@ -1997,12 +2000,11 @@ a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .new
   }
 
   .opening-soon{
-    position: relative;
-    top: 27px;
+    display: none;
 }
 
 .opening-soon-mobile{
-    display:none;
+    display: block
 }
 }
 
