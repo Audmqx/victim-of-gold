@@ -15,7 +15,7 @@ get_header();
                     </div>
                     <div class="contact-info">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icone instagram.svg" alt="Téléphone" />
-                        <span>+33 (0)4 97 06 80 01</span>
+                        <span>04 97 06 94 09</span>
                     </div>
                     <div class="contact-info">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icone-tel.svg" alt="Instagram" />

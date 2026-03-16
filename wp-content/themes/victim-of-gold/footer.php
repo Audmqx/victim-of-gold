@@ -4,12 +4,11 @@
         <div class="horaires-list">
             <div class="horaire-item">
                 <h3>HORAIRES BOUTIQUE</h3>
-                <p>Du Lundi au Dimanche
-10.00 - 19.00</p>
+                <p>Du Mardi au Samedi de 10h à 19h</p>
             </div>
             <div class="horaire-item">
                 <h3>HORAIRES CAFÉ</h3>
-                <p>Opening Soon</p>
+                <p>Du Mardi au Samedi de 10h à 19h</p>
             </div>
         </div>
     </div>
@@ -45,8 +44,8 @@
             <a href="/contact">Contact</a>
         </div>
         <div class="footer-contact">
-            <p>+33 (0)4 97 06 80 01</p>
-            <p>contact@victimofgold.com</p>
+            <p>04 97 06 94 09</p>
+            <p>cannes@victimofgold.com</p>
             <p>9 rue des Serbes, 06400 Cannes</p>
         </div>
         <div class="footer-social">
