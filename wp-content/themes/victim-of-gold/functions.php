@@ -102,20 +102,27 @@ function victim_of_gold_scripts()
         ]);
     }
     
-    // Autres scripts existants...
-    wp_enqueue_style('leaflet-css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', [], '1.9.4');
-    wp_enqueue_script('hero-animation', get_template_directory_uri() . '/js/hero-animation.js', [], '1.0.0', true);
+    // Hero animation : home uniquement
+    if (is_front_page() || is_home()) {
+        wp_enqueue_script('hero-animation', get_template_directory_uri() . '/js/hero-animation.js', [], '1.0.0', true);
+    }
+
     wp_enqueue_script('horaires', get_template_directory_uri() . '/js/horaires.js', [], '1.0.0', true);
-    wp_enqueue_script('leaflet-js', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', [], '1.9.4', false);
-    
-    wp_localize_script('leaflet-js', 'shopLocation', [
-        'lat' => 43.5518889,
-        'lng' => 7.0205556,
-        'address' => '9 rue des Serbes, 06400 Cannes'
-    ]);
-    
-    wp_enqueue_script('victim-of-gold-map', get_template_directory_uri() . '/js/map.js', ['leaflet-js'], '1.0.0', true);
-    wp_enqueue_script('victim-of-gold-leaflet-map', get_template_directory_uri() . '/js/leaflet-map.js', ['leaflet-js'], '1.0.0', true);
+
+    // Leaflet + carte : home et page contact uniquement
+    if (is_front_page() || is_home() || is_page('contact')) {
+        wp_enqueue_style('leaflet-css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', [], '1.9.4');
+        wp_enqueue_script('leaflet-js', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', [], '1.9.4', true);
+
+        wp_localize_script('leaflet-js', 'shopLocation', [
+            'lat' => 43.5518889,
+            'lng' => 7.0205556,
+            'address' => '9 rue des Serbes, 06400 Cannes'
+        ]);
+
+        wp_enqueue_script('victim-of-gold-map', get_template_directory_uri() . '/js/map.js', ['leaflet-js'], '1.0.0', true);
+        wp_enqueue_script('victim-of-gold-leaflet-map', get_template_directory_uri() . '/js/leaflet-map.js', ['leaflet-js'], '1.0.0', true);
+    }
 }
 add_action('wp_enqueue_scripts', 'victim_of_gold_scripts');
 
@@ -186,36 +193,6 @@ function victim_of_gold_check_woocommerce()
 }
 add_action('admin_init', 'victim_of_gold_check_woocommerce');
 
-// Débogage WooCommerce
-function victim_of_gold_debug_woocommerce()
-{
-    // Vérifier si WooCommerce est actif et chargé
-    if (!class_exists('WooCommerce')) {
-        error_log('WooCommerce n\'est pas actif');
-        return;
-    }
-
-    // Vérifier si les fonctions WooCommerce sont disponibles
-    if (!function_exists('is_checkout') || !function_exists('wc_get_page_id')) {
-        error_log('Les fonctions WooCommerce ne sont pas disponibles');
-        return;
-    }
-    
-    if (is_checkout()) {
-        error_log('Page checkout demandée');
-        
-        // Vérifie si la page checkout est configurée
-        $checkout_page_id = wc_get_page_id('checkout');
-        error_log('ID de la page checkout : ' . $checkout_page_id);
-        
-        // Vérifie si le shortcode est présent
-        $checkout_page = get_post($checkout_page_id);
-        if ($checkout_page) {
-            error_log('Contenu de la page checkout : ' . $checkout_page->post_content);
-        }
-    }
-}
-add_action('wp', 'victim_of_gold_debug_woocommerce');
 
 /**
  * Wrap WooCommerce pages
