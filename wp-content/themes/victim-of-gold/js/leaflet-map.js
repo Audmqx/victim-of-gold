@@ -57,7 +57,7 @@ function initLeafletMap() {
   }).addTo(map);
   
   // Add popup to the marker
-  marker.bindPopup("<b>Victim of Gold</b><br>9 rue des Serbes, 06400 Cannes").openPopup();
+  marker.bindPopup("<b>Victim of Gold</b><br>9 rue des Serbes, 06400 Cannes");
   
   // Add custom CSS to the map tiles
   const style = document.createElement('style');

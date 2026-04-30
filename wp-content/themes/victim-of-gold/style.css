@@ -1145,6 +1145,17 @@ nav.menu {
     line-height: 1.07em;
 }
 
+.footer-social a {
+    display: inline-block;
+    margin-top: 12px;
+    color: #FFFFFF;
+    transition: color 0.2s ease;
+}
+
+.footer-social a:hover {
+    color: #957B4D;
+}
+
 .footer-copyright {
     max-width: 1440px;
     margin: 0 auto;
@@ -2213,5 +2224,69 @@ a span.animated-a, .menu a span.animated-a, .news-more-btn span.animated-a, .new
     .about-text {
         font-size: 1rem;
         line-height: 1.4;
+    }
+}
+
+/* ============================================
+   MENTIONS LÉGALES
+   ============================================ */
+
+.mentions-main {
+    background-color: #FDFAF4;
+    padding: 80px 0 120px;
+}
+
+.mentions-container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.mentions-container h1 {
+    font-family: 'PrioriSerBold', serif;
+    font-size: 42px;
+    color: #151515;
+    letter-spacing: 0.02em;
+    margin-bottom: 56px;
+    text-align: center;
+}
+
+.mentions-container h2 {
+    font-family: 'PrioriSerBold', serif;
+    font-size: 18px;
+    color: #151515;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 40px 0 12px;
+}
+
+.mentions-container p {
+    font-family: 'Priori Serif OT', Georgia, serif;
+    font-size: 15px;
+    color: #444;
+    line-height: 1.75;
+    margin: 0 0 12px;
+}
+
+.mentions-container strong {
+    color: #151515;
+}
+
+@media (max-width: 767px) {
+    .mentions-main {
+        padding: 48px 0 80px;
+    }
+
+    .mentions-container {
+        padding: 0 24px;
+    }
+
+    .mentions-container h1 {
+        font-size: 28px;
+        margin-bottom: 36px;
+    }
+
+    .mentions-container h2 {
+        font-size: 14px;
     }
 }

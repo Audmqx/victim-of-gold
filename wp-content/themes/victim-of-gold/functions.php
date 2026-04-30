@@ -110,7 +110,7 @@ function victim_of_gold_scripts()
     wp_enqueue_script('horaires', get_template_directory_uri() . '/js/horaires.js', [], '1.0.0', true);
 
     // Leaflet + carte : home et page contact uniquement
-    if (is_front_page() || is_home() || is_page('contact')) {
+    if (is_front_page() || is_home() || is_page('contact') || is_page('cafe')) {
         wp_enqueue_style('leaflet-css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', [], '1.9.4');
         wp_enqueue_script('leaflet-js', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', [], '1.9.4', true);
 
@@ -476,6 +476,16 @@ add_action('mailpoet_subscription_before_subscribe', function ($data, $segmentId
         wp_mail($to, $subject, $message, $headers);
     }
 }, 10, 3);
+
+// Enqueue les assets de la page Café
+function cafe_enqueue_assets()
+{
+    if (is_page('cafe') || is_page_template('page-cafe.php')) {
+        wp_enqueue_style('cafe-css', get_template_directory_uri() . '/assets/css/cafe.css', [], '1.0.0');
+        wp_enqueue_script('cafe-carousel', get_template_directory_uri() . '/js/cafe-carousel.js', [], '1.0.0', true);
+    }
+}
+add_action('wp_enqueue_scripts', 'cafe_enqueue_assets');
 
 // Enqueue Lightbox2 pour la galerie de la page Atelier
 function atelier_enqueue_lightbox()
