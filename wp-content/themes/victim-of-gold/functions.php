@@ -43,11 +43,6 @@ function victim_of_gold_add_woocommerce_support()
     add_theme_support('wc-product-gallery-lightbox');
     add_theme_support('wc-product-gallery-slider');
     
-    // Support des shortcodes WooCommerce
-    add_filter('widget_text', 'do_shortcode');
-    add_filter('the_excerpt', 'do_shortcode');
-    add_filter('the_content', 'do_shortcode');
-    
     add_theme_support('woocommerce', [
         'thumbnail_image_width' => 300,
         'single_image_width' => 600,
@@ -75,16 +70,6 @@ add_action('wp_enqueue_scripts', 'victim_of_gold_ajax_add_to_cart_js');
 // Enqueue scripts and styles
 function victim_of_gold_scripts()
 {
-    // Enqueue Google Fonts
-    $google_fonts_url = add_query_arg(
-        [
-            'family' => 'Verdana:400,700',
-            'display' => 'swap',
-        ],
-        'https://fonts.googleapis.com/css2'
-    );
-    wp_enqueue_style('google-fonts', $google_fonts_url, [], null);
-    
     // Enqueue theme stylesheet
     wp_enqueue_style('victim-of-gold-style', get_stylesheet_uri(), [], '1.0.0');
     
@@ -297,12 +282,6 @@ add_filter('woocommerce_checkout_redirect_empty_cart', 'victim_of_gold_disable_c
 function victim_of_gold_force_woocommerce_templates()
 {
     if (class_exists('WooCommerce')) {
-        // Définir le chemin des templates WooCommerce
-        add_filter('woocommerce_template_path', function () {
-            return 'woocommerce/';
-        });
-
-        // S'assurer que WooCommerce utilise nos templates
         add_filter('template_include', function ($template) {
             if (is_shop() || is_product_category() || is_product_tag()) {
                 $new_template = locate_template(['woocommerce/archive-product.php']);
@@ -404,15 +383,19 @@ add_action('woocommerce_product_data_panels', 'vog_product_data_fields');
  */
 function vog_save_product_data($post_id)
 {
-    // Entretien
+    if (!isset($_POST['woocommerce_meta_nonce']) || !wp_verify_nonce($_POST['woocommerce_meta_nonce'], 'woocommerce_save_data')) {
+        return;
+    }
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
     $entretien = isset($_POST['_entretien']) ? wp_kses_post($_POST['_entretien']) : '';
     update_post_meta($post_id, '_entretien', $entretien);
-    
-    // Taille
+
     $taille = isset($_POST['_taille']) ? wp_kses_post($_POST['_taille']) : '';
     update_post_meta($post_id, '_taille', $taille);
-    
-    // Livraison & Retours
+
     $livraison_retours = isset($_POST['_livraison_retours']) ? wp_kses_post($_POST['_livraison_retours']) : '';
     update_post_meta($post_id, '_livraison_retours', $livraison_retours);
 }

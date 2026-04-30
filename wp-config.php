@@ -44,14 +44,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY', 'put your unique phrase here');
-define('SECURE_AUTH_KEY', 'put your unique phrase here');
-define('LOGGED_IN_KEY', 'put your unique phrase here');
-define('NONCE_KEY', 'put your unique phrase here');
-define('AUTH_SALT', 'put your unique phrase here');
-define('SECURE_AUTH_SALT', 'put your unique phrase here');
-define('LOGGED_IN_SALT', 'put your unique phrase here');
-define('NONCE_SALT', 'put your unique phrase here');
+define('AUTH_KEY',         'pqw0BrdNIZ7YPLWriMHbukPSxURieP1trIq8C1SeltJ9GhdrsGvBxYNIm3fspv');
+define('SECURE_AUTH_KEY',  'SqvVFdFPc6JmITUoagYgKR9BXIcxUMSm0wDmnkKV2SctWbEKRAf2uossxYyoyH8q');
+define('LOGGED_IN_KEY',    'gGeBSFUNe4aoKpzEqwXBwidCuP73peil7HXDU2A6kWjkxbwgPwed9F6GYGLTt');
+define('NONCE_KEY',        'EtSQXSRTOG43e9xSgI1oXyQaMW8KJwgcvZJfi3XJe9Di2ZAPJKgrImPdSJ8AqX');
+define('AUTH_SALT',        'J1C6mK0kMLX5RSxFJYtAVjthqtiyuzdga7VsJmWSOj7JEhxKySZFFPrJXpEXC');
+define('SECURE_AUTH_SALT', 'kPlfwXUwobzkUgLwqZHFAGzpwioRHxTesHdN8MebApAFYIKBQoPZwf3b0oOVHG');
+define('LOGGED_IN_SALT',   'OBXzRkPcsg3Gkh08eaXuHu4l7ZZQpkT7KLAAc5GbLsbAI51oLQ7zZ2CRv2OOdBLN');
+define('NONCE_SALT',       'WkclbQ0PI5ablUymhqlNbjWJaIiymyuaJNPabLD2N8IyAKVSNabAOeEqihz5Pu');
 
 /**#@-*/
 
@@ -84,6 +84,17 @@ $table_prefix = 'wp_';
 define('WP_DEBUG', false);
 
 /* Add any custom values between this line and the "stop editing" line. */
+
+// Sécurité
+define('DISALLOW_FILE_EDIT', true);        // Désactive l'éditeur de fichiers dans l'admin
+define('WP_DEBUG_DISPLAY', false);         // Ne jamais afficher les erreurs en production
+define('FORCE_SSL_ADMIN', true);           // Admin toujours en HTTPS
+ini_set('display_errors', 0);
+
+// Performance
+define('WP_POST_REVISIONS', 5);            // Limite les révisions en base
+define('AUTOSAVE_INTERVAL', 120);          // Autosave toutes les 2 min (défaut : 60s)
+define('WP_CACHE', true);                  // Activé pour les plugins de cache
 
 // Configuration de la langue française
 define('WPLANG', 'fr_FR');

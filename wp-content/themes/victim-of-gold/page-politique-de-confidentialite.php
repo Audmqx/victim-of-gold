@@ -23,7 +23,6 @@ get_header();
             <p>
                 — Données d'identification : nom, prénom, adresse email<br>
                 — Données de contact : adresse postale, numéro de téléphone<br>
-                — Données de connexion : adresse IP, pages visitées, durée de visite<br>
                 — Données de commande : historique d'achat, informations de livraison
             </p>
 
