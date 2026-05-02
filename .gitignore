@@ -1,48 +1,85 @@
-# Wordpress - ignore core, configuration, examples, uploads and logs.
-# https://github.com/github/gitignore/blob/main/WordPress.gitignore
+# ============================================================
+# WordPress — ignorer le core, plugins, themes tiers, uploads
+# Seul le thème custom victim-of-gold est tracké
+# ============================================================
 
-# Core
-#
-# Note: if you want to stage/commit WP core files
-# you can delete this whole section/until Configuration.
-# /wp-admin/
-# /wp-content/index.php
-# /wp-content/languages
-# /wp-content/plugins/index.php
-# /wp-content/themes/index.php
-# /wp-includes/
-# /index.php
-# /license.txt
-# /readme.html
-# /wp-*.php
-# /xmlrpc.php
+# --- Core WordPress ---
+/wp-admin/
+/wp-includes/
+/index.php
+/license.txt
+/readme.html
+/xmlrpc.php
+/wp-activate.php
+/wp-blog-header.php
+/wp-comments-post.php
+/wp-cron.php
+/wp-links-opml.php
+/wp-load.php
+/wp-login.php
+/wp-mail.php
+/wp-settings.php
+/wp-signup.php
+/wp-trackback.php
 
-# Configuration
-# wp-config.php
+# --- Configuration (contient les credentials DB) ---
+/wp-config.php
+/wp-config-sample.php
 
-# Example themes
-# /wp-content/themes/twenty*/
+# --- Plugins (tous ignorés) ---
+/wp-content/plugins/
 
-# Example plugin
-# /wp-content/plugins/hello.php
+# --- Thèmes tiers (ignorés) ---
+/wp-content/themes/twentytwentytwo/
+/wp-content/themes/twentytwentythree/
+/wp-content/themes/twentytwentyfour/
+/wp-content/themes/twentytwentyfive/
 
-# Uploads
+# Garder uniquement le thème custom victim-of-gold
+# /wp-content/themes/victim-of-gold/ → tracké ✓
+
+# --- Uploads ---
 /wp-content/uploads/
 
-# Log files
+# --- Cache & fichiers générés ---
+/wp-content/cache/
+/wp-content/upgrade/
+/wp-content/backup-db/
+/wp-content/backups/
+/wp-content/languages/
+/wp-content/advanced-cache.php
+/wp-content/object-cache.php
+/wp-content/db.php
+
+# --- Fichiers serveur ---
+/.htaccess
+/php.ini
 *.log
 
-# htaccess
-# /.htaccess
+# --- Node / tooling ---
+node_modules/
+.env
+.env.*
+npm-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
 
-# All plugins
-#
-# Note: If you wish to whitelist plugins,
-# uncomment the next line
-#/wp-content/plugins
+# --- IDE & outils locaux ---
+.claude/
+.codex/
+.cursor/
+.idea/
+.vscode/
 
-# All themes
-#
-# Note: If you wish to whitelist themes,
-# uncomment the next line
-#/wp-content/themes
+# --- Déploiement & sync ---
+.ftp-deploy-sync-state.json
+.well-known/
+
+# --- Fichiers générés / plugin ---
+/wp-content/jetpack-waf/
+/wp-content/wp-rocket-config/
+
+# --- Médias isolés ---
+thumbnail_*.jpg
+thumbnail_*.png
