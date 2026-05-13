@@ -3,6 +3,112 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+/**
+ * Returns true if the current page is any language version of the given French slug.
+ * Works with or without Polylang.
+ */
+function vog_is_any_translation_of(string $fr_slug): bool
+{
+    if (!is_page()) {
+        return false;
+    }
+    if (is_page($fr_slug)) {
+        return true;
+    }
+    if (function_exists('pll_get_post_translations')) {
+        $source = get_page_by_path($fr_slug);
+        if ($source) {
+            $ids = array_values(pll_get_post_translations($source->ID));
+            return in_array(get_the_ID(), $ids, true);
+        }
+    }
+    return false;
+}
+
+/**
+ * Returns the current 2-letter language code.
+ * Works with Polylang (pll_current_language) or falls back to
+ * the ?lang= query param, then WPLANG, then 'fr'.
+ */
+function vog_current_lang(): string
+{
+    if (function_exists('pll_current_language')) {
+        return pll_current_language('slug') ?: 'fr';
+    }
+    $param = isset($_GET['lang']) ? sanitize_key($_GET['lang']) : '';
+    if (in_array($param, ['en', 'ru', 'zh'], true)) {
+        return $param;
+    }
+    $wplang = defined('WPLANG') ? WPLANG : get_option('WPLANG', 'fr_FR');
+    return substr($wplang, 0, 2) ?: 'fr';
+}
+
+/**
+ * Returns the HTML for the language switcher.
+ *
+ * When Polylang is active, uses pll_the_languages() raw data so links
+ * point to the correct translated page (not just the home URL).
+ * Falls back to ?lang= query params when Polylang is not active.
+ */
+function vog_lang_switcher_html(): string
+{
+    $labels  = ['fr' => 'FR', 'en' => 'EN', 'ru' => 'RU', 'zh' => '中文'];
+    $current = vog_current_lang();
+    $parts   = [];
+
+    if (function_exists('pll_the_languages')) {
+        $pll_langs = pll_the_languages(['raw' => 1, 'hide_if_no_translation' => 0]);
+        foreach ($pll_langs as $lang) {
+            $code  = $lang['slug'];
+            $label = $labels[$code] ?? strtoupper($code);
+            $class = $lang['current_lang'] ? 'lang-link lang-link--active' : 'lang-link';
+            $parts[] = sprintf(
+                '<a href="%s" class="%s" lang="%s" hreflang="%s">%s</a>',
+                esc_url($lang['url']),
+                esc_attr($class),
+                esc_attr($code),
+                esc_attr($code),
+                esc_html($label)
+            );
+        }
+    } else {
+        foreach ($labels as $code => $label) {
+            $url   = $code === 'fr'
+                ? remove_query_arg('lang')
+                : add_query_arg('lang', $code);
+            $class = $code === $current ? 'lang-link lang-link--active' : 'lang-link';
+            $parts[] = sprintf(
+                '<a href="%s" class="%s" lang="%s" hreflang="%s">%s</a>',
+                esc_url($url),
+                esc_attr($class),
+                esc_attr($code),
+                esc_attr($code),
+                esc_html($label)
+            );
+        }
+    }
+
+    return '<div class="language-selector">'
+        . implode('<span class="lang-sep" aria-hidden="true"> | </span>', $parts)
+        . '</div>';
+}
+
+/**
+ * Returns the hero SVG path for the current language.
+ */
+function vog_hero_svg_path(): string
+{
+    $lang = vog_current_lang();
+    $map = [
+        'en' => '/assets/images/hero-text-en.svg',
+        'ru' => '/assets/images/hero-text-en.svg',
+        'zh' => '/assets/images/hero-text-en.svg',
+    ];
+    $file = $map[$lang] ?? '/assets/images/hero-text.svg';
+    $full = get_template_directory() . $file;
+    return file_exists($full) ? $full : get_template_directory() . '/assets/images/hero-text.svg';
+}
+
 // Theme Setup
 function victim_of_gold_setup()
 {
@@ -94,20 +200,18 @@ function victim_of_gold_scripts()
 
     wp_enqueue_script('horaires', get_template_directory_uri() . '/js/horaires.js', [], '1.0.0', true);
 
-    // Leaflet + carte : home et page contact uniquement
-    if (is_front_page() || is_home() || is_page('contact') || is_page('cafe')) {
-        wp_enqueue_style('leaflet-css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', [], '1.9.4');
-        wp_enqueue_script('leaflet-js', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', [], '1.9.4', true);
+    // Leaflet — dans le footer sur toutes les pages
+    wp_enqueue_style('leaflet-css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', [], '1.9.4');
+    wp_enqueue_script('leaflet-js', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', [], '1.9.4', true);
 
-        wp_localize_script('leaflet-js', 'shopLocation', [
-            'lat' => 43.5518889,
-            'lng' => 7.0205556,
-            'address' => '9 rue des Serbes, 06400 Cannes'
-        ]);
+    wp_localize_script('leaflet-js', 'shopLocation', [
+        'lat'     => 43.5518889,
+        'lng'     => 7.0205556,
+        'address' => '9 rue des Serbes, 06400 Cannes',
+    ]);
 
-        wp_enqueue_script('victim-of-gold-map', get_template_directory_uri() . '/js/map.js', ['leaflet-js'], '1.0.0', true);
-        wp_enqueue_script('victim-of-gold-leaflet-map', get_template_directory_uri() . '/js/leaflet-map.js', ['leaflet-js'], '1.0.0', true);
-    }
+    wp_enqueue_script('victim-of-gold-map', get_template_directory_uri() . '/js/map.js', ['leaflet-js'], '1.0.0', true);
+    wp_enqueue_script('victim-of-gold-leaflet-map', get_template_directory_uri() . '/js/leaflet-map.js', ['leaflet-js'], '1.0.0', true);
 }
 add_action('wp_enqueue_scripts', 'victim_of_gold_scripts');
 
@@ -445,6 +549,8 @@ add_filter('gettext', 'vog_change_view_cart_button_text', 20, 3);
  * Include WooCommerce translations
  */
 require get_template_directory() . '/inc/woocommerce-translations.php';
+require get_template_directory() . '/inc/translations.php';
+require get_template_directory() . '/inc/polylang.php';
 
 // Notification MailPoet : envoi d'un email à chaque inscription via le formulaire n°2
 add_action('mailpoet_subscription_before_subscribe', function ($data, $segmentIds, $form) {
@@ -463,7 +569,7 @@ add_action('mailpoet_subscription_before_subscribe', function ($data, $segmentId
 // Enqueue les assets de la page Café
 function cafe_enqueue_assets()
 {
-    if (is_page('cafe') || is_page_template('page-cafe.php')) {
+    if (vog_is_any_translation_of('cafe') || is_page_template('page-cafe.php')) {
         wp_enqueue_style('cafe-css', get_template_directory_uri() . '/assets/css/cafe.css', [], '1.0.0');
         wp_enqueue_script('cafe-carousel', get_template_directory_uri() . '/js/cafe-carousel.js', [], '1.0.0', true);
     }
@@ -473,7 +579,7 @@ add_action('wp_enqueue_scripts', 'cafe_enqueue_assets');
 // Enqueue Lightbox2 pour la galerie de la page Atelier
 function atelier_enqueue_lightbox()
 {
-    if (is_page('atelier')) {
+    if (vog_is_any_translation_of('atelier')) {
         wp_enqueue_style('lightbox2', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css');
         wp_enqueue_script('lightbox2', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js', ['jquery'], null, true);
     }
@@ -483,7 +589,7 @@ add_action('wp_enqueue_scripts', 'atelier_enqueue_lightbox');
 // Enqueue le CSS spécifique pour la page Atelier
 function atelier_enqueue_styles()
 {
-    if (is_page('atelier')) {
+    if (vog_is_any_translation_of('atelier')) {
         wp_enqueue_style('atelier-css', get_template_directory_uri() . '/assets/css/atelier.css');
     }
 }
@@ -492,7 +598,7 @@ add_action('wp_enqueue_scripts', 'atelier_enqueue_styles');
 // Enqueue le JavaScript d'optimisation pour la page Atelier
 function atelier_enqueue_optimization()
 {
-    if (is_page('atelier')) {
+    if (vog_is_any_translation_of('atelier')) {
         wp_enqueue_script('atelier-optimization', get_template_directory_uri() . '/assets/js/atelier-optimization.js', [], '1.0.0', true);
     }
 }

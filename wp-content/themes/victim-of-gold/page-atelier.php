@@ -36,7 +36,15 @@ function get_mobile_image_order($images)
     <section class="atelier-hero-bg">
         <div class="container atelier-hero-container">
             <div class="atelier-hero-graphic">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/atelier.svg" alt="Atelier Graphisme">
+                <?php
+                $atelier_svgs = [
+                    'en' => 'workshop.svg',
+                    'ru' => 'workshop.svg',
+                    'zh' => 'workshop.svg',
+                ];
+                $atelier_svg = $atelier_svgs[vog_current_lang()] ?? 'atelier.svg';
+                ?>
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/<?php echo $atelier_svg; ?>" alt="<?php echo vog_t('atelier.graphic_alt', 'Atelier Graphisme'); ?>">
             </div>
             <div class="atelier-hero-text">
                 <?php

@@ -194,9 +194,45 @@ nav.menu {
     z-index: 1001;
 }
 
-/* Temporairement caché - À réactiver plus tard */
+/* Language switcher — desktop (inside icons-container) */
 .language-selector {
-    display: none !important;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    line-height: 1;
+}
+
+/* The instance inside nav.menu is for mobile only */
+nav.menu > .language-selector {
+    display: none;
+}
+
+.lang-link {
+    color: #fff;
+    text-decoration: none;
+    opacity: 0.5;
+    transition: opacity 0.2s ease, color 0.2s ease;
+    padding: 2px 0;
+}
+
+.lang-link--active {
+    opacity: 1;
+    color: #957B4D;
+}
+
+.lang-link:hover {
+    opacity: 1;
+    color: #957B4D !important;
+}
+
+.lang-sep {
+    color: #fff;
+    opacity: 0.25;
+    font-size: 10px;
+    padding: 0 4px;
+    user-select: none;
 }
 
 /* Hamburger Menu */
@@ -442,10 +478,18 @@ nav.menu {
         color: #957B4D;
     }
 
-    .language-selector {
+    /* Sur mobile : masquer le switcher dans icons-container, l'afficher dans la nav */
+    .icons-container > .language-selector {
+        display: none;
+    }
+
+    nav.menu > .language-selector {
+        display: flex;
         margin-top: auto;
         padding: 20px 0;
         justify-content: center;
+        font-size: 14px;
+        letter-spacing: 0.15em;
     }
 }
 
@@ -715,7 +759,7 @@ nav.menu {
         gap: 20px;
     }
 
-    .language-selector {
+    nav.menu > .language-selector {
         font-size: 16px;
     }
 

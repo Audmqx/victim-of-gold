@@ -25,15 +25,15 @@ $mobile_slides = [
                 <source media="(max-width: 767px)" srcset="<?php echo $img; ?>/cafe-hero-mobile.jpg">
                 <img class="cafe-hero__img"
                      src="<?php echo $img; ?>/cafe-hero.jpg"
-                     alt="Le Café Victim of Gold">
+                     alt="<?php echo esc_attr(vog_t('cafe.alt.hero', 'Le Café Victim of Gold')); ?>">
             </picture>
         </section>
 
         <section class="cafe-text-section">
             <div class="cafe-text-section__inner">
                 <div class="cafe-text-section__text">
-                    <p>Un lieu hors du temps pour vivre une aventure enchantée.<br class="desktop-break"> Maison de tradition revisitée pour un voyage culinaire, sensoriel et interactif.</p>
-                    <p>Pour un déjeuner en amoureux, un café entre amis, un repas d'affaire ou un moment de partage en famille,<br class="desktop-break"> venez vivre une expérience unique ou la passion de l'or devient magique.</p>
+                    <p><?php echo vog_t('cafe.p1', 'Un lieu hors du temps pour vivre une aventure enchantée.<br class="desktop-break"> Maison de tradition revisitée pour un voyage culinaire, sensoriel et interactif.'); ?></p>
+                    <p><?php echo vog_t('cafe.p2', "Pour un déjeuner en amoureux, un café entre amis, un repas d'affaire ou un moment de partage en famille,<br class=\"desktop-break\"> venez vivre une expérience unique ou la passion de l'or devient magique."); ?></p>
                 </div>
             </div>
         </section>
@@ -50,28 +50,28 @@ $mobile_slides = [
 
         <div class="cafe-grid-row">
             <div class="cafe-grid-img cafe-grid-img--large">
-                <img src="<?php echo $img; ?>/cafe-terrasse-1.jpg" alt="Terrasse du Café Victim of Gold" loading="lazy">
+                <img src="<?php echo $img; ?>/cafe-terrasse-1.jpg" alt="<?php echo esc_attr(vog_t('cafe.alt.terrasse', 'Terrasse du Café Victim of Gold')); ?>" loading="lazy">
             </div>
             <div class="cafe-grid-img cafe-grid-img--small">
-                <img src="<?php echo $img; ?>/cafe-vanille.jpg" alt="Dessert vanille dorée" loading="lazy">
+                <img src="<?php echo $img; ?>/cafe-vanille.jpg" alt="<?php echo esc_attr(vog_t('cafe.alt.vanille', 'Dessert vanille dorée')); ?>" loading="lazy">
             </div>
         </div>
 
         <div class="cafe-grid-row">
             <div class="cafe-grid-img cafe-grid-img--small">
-                <img src="<?php echo $img; ?>/cafe-gold.jpg" alt="Café Gold" loading="lazy">
+                <img src="<?php echo $img; ?>/cafe-gold.jpg" alt="<?php echo esc_attr(vog_t('cafe.alt.gold', 'Café Gold')); ?>" loading="lazy">
             </div>
             <div class="cafe-grid-img cafe-grid-img--large">
-                <img src="<?php echo $img; ?>/cafe-champagne.jpg" alt="Champagne" loading="lazy">
+                <img src="<?php echo $img; ?>/cafe-champagne.jpg" alt="<?php echo esc_attr(vog_t('cafe.alt.champagne', 'Champagne')); ?>" loading="lazy">
             </div>
         </div>
 
         <div class="cafe-grid-row">
             <div class="cafe-grid-img cafe-grid-img--large">
-                <img src="<?php echo $img; ?>/cafe-terrasse-2.jpg" alt="Terrasse et vue" loading="lazy">
+                <img src="<?php echo $img; ?>/cafe-terrasse-2.jpg" alt="<?php echo esc_attr(vog_t('cafe.alt.terrasse', 'Terrasse et vue')); ?>" loading="lazy">
             </div>
             <div class="cafe-grid-img cafe-grid-img--small">
-                <img src="<?php echo $img; ?>/cafe-glace-choco.jpg" alt="Glace chocolat" loading="lazy">
+                <img src="<?php echo $img; ?>/cafe-glace-choco.jpg" alt="<?php echo esc_attr(vog_t('cafe.alt.choco', 'Glace chocolat')); ?>" loading="lazy">
             </div>
         </div>
 

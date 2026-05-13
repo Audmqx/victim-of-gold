@@ -6,18 +6,18 @@
         <video class="hero-video" autoplay muted loop playsinline preload="metadata"
         webkit-playsinline x-webkit-airplay="allow">
             <source src="<?php echo get_template_directory_uri(); ?>/assets/images/acceuil-short.mp4" type="video/mp4">
-            Votre navigateur ne supporte pas la lecture de vidéos.
+            <?php echo vog_t('home.video_fallback', 'Votre navigateur ne supporte pas la lecture de vidéos.'); ?>
         </video>
         <div class="hero-text">
-            <?php include get_template_directory() . '/assets/images/hero-text.svg'; ?>
+            <?php include vog_hero_svg_path(); ?>
         </div>
     </section>
 
-     <!-- ABOUT SECTION -->
-        <section class="about-section">
+    <!-- ABOUT SECTION -->
+    <section class="about-section">
         <div class="about-content">
             <p class="about-text">
-                Victim of Gold est un concept store qui allie l'or pur 24 carats et un savoir-faire unique au monde : Atelier, Boutique & Café pour découvrir et vivre une expérience en or.
+                <?php echo vog_t('home.about', "Victim of Gold est un concept store qui allie l'or pur 24 carats et un savoir-faire unique au monde&nbsp;: Atelier, Boutique &amp; Café pour découvrir et vivre une expérience en or."); ?>
             </p>
         </div>
     </section>
@@ -53,7 +53,7 @@ if ($news_query->have_posts()) :
         } ?>
                         </div>
                         <div class="news-alternating-excerpt"><?php echo get_the_excerpt(); ?></div>
-                        <a href="<?php the_permalink(); ?>" class="news-alternating-btn">Lire</a>
+                        <a href="<?php the_permalink(); ?>" class="news-alternating-btn"><?php echo vog_t('home.read_more', 'Lire'); ?></a>
                     </div>
                 </div>
             <?php $i++; endwhile;

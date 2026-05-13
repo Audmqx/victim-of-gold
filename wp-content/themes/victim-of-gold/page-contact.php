@@ -24,7 +24,7 @@ get_header();
                 </div>
             </div>
             <div class="contact-right">
-                <h2 class="contact-title">PRENONS CONTACT</h2>
+                <h2 class="contact-title"><?php echo vog_t('contact.title', 'PRENONS CONTACT'); ?></h2>
                 <div class="contact-form-wrapper">
                     <?php echo do_shortcode('[mailpoet_form id="3"]'); ?>
                 </div>

@@ -30,10 +30,12 @@
                     'items_wrap' => '<ul class="menu">%3$s</ul>',
                     'walker' => new VOG_Menu_Walker()
                 ]);
-?>
+                echo vog_lang_switcher_html();
+                ?>
             </nav>
 
             <div class="icons-container">
+                <?php echo vog_lang_switcher_html(); ?>
                 <div class="profile-icon">
                     <a href="<?php echo esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))); ?>" title="<?php esc_attr_e('My Account', 'victim-of-gold'); ?>">
                         <?php include get_template_directory() . '/assets/images/profil.svg'; ?>
