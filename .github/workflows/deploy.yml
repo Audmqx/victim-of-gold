@@ -3,7 +3,7 @@ name: Deploy to Production
 on:
   push:
     branches:
-      - main  # ou master selon votre branche principale
+      - main
 
 jobs:
   deploy:
@@ -11,18 +11,18 @@ jobs:
     environment: prod
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: 📂 Deploy to FTP
+      - name: 📂 Deploy theme to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./
-          server-dir: ./
+          local-dir: ./wp-content/themes/victim-of-gold/
+          server-dir: ./wp-content/themes/victim-of-gold/
+          dangerous-clean-slate: false
           exclude: |
             **/.git*
             **/.git*/**
             **/node_modules/**
-            **/.env 

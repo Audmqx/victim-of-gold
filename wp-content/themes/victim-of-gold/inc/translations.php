@@ -34,6 +34,13 @@ function vog_get_translations(): array
             'footer.privacy'          => 'Privacy Policy',
             'footer.follow'           => 'Follow us',
 
+            // WooCommerce
+            'wc.add_to_cart'    => 'Add to cart',
+            'wc.view_cart'      => 'View cart',
+            'wc.checkout'       => 'Checkout',
+            'wc.added_single'   => '%s has been added to your cart.',
+            'wc.added_multiple' => 'The products have been added to your cart.',
+
             // Image alt texts
             'cafe.alt.terrasse'   => 'Café terrace',
             'cafe.alt.vanille'    => 'Vanilla dessert',

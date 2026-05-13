@@ -519,9 +519,9 @@ function vog_custom_wc_add_to_cart_message($message, $products)
     }
 
     if (count($titles) === 1) {
-        $message = sprintf('%s a été ajouté à votre panier.', $titles[0]);
+        $message = sprintf(vog_t('wc.added_single', '%s a été ajouté à votre panier.'), $titles[0]);
     } elseif (count($titles) > 1) {
-        $message = 'Les produits ont été ajoutés à votre panier.';
+        $message = vog_t('wc.added_multiple', 'Les produits ont été ajoutés à votre panier.');
     }
 
     return $message;
@@ -534,10 +534,10 @@ function vog_change_view_cart_button_text($translated_text, $text, $domain)
     if ($domain === 'woocommerce') {
         switch ($text) {
             case 'View cart':
-                $translated_text = 'Voir le panier';
+                $translated_text = vog_t('wc.view_cart', 'Voir le panier');
                 break;
             case 'Add to cart':
-                $translated_text = 'Ajouter au panier';
+                $translated_text = vog_t('wc.add_to_cart', 'Ajouter au panier');
                 break;
         }
     }
@@ -640,7 +640,7 @@ function victim_of_gold_ensure_checkout_button()
         // Ajouter un bouton de checkout personnalisé si nécessaire
         add_action('woocommerce_after_cart_table', function () {
             echo '<div class="cart-checkout-button-wrapper">';
-            echo '<a href="' . esc_url(wc_get_checkout_url()) . '" class="button checkout-button">' . esc_html__('Paiement', 'victim-of-gold') . '</a>';
+            echo '<a href="' . esc_url(wc_get_checkout_url()) . '" class="button checkout-button">' . esc_html(vog_t('wc.checkout', 'Paiement')) . '</a>';
             echo '</div>';
         });
     }
