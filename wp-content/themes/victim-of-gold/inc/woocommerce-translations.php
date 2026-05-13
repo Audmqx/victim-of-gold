@@ -16,7 +16,9 @@ function vog_woocommerce_translations($translated_text, $text, $domain) {
         return $translated_text;
     }
 
-    $lang = vog_current_lang();
+    // get_locale() est switché par Polylang dès le début de la requête,
+    // plus fiable que vog_current_lang() sur les pages WooCommerce.
+    $lang = substr(get_locale(), 0, 2);
 
     if ($lang === 'fr') {
         $fr = [
