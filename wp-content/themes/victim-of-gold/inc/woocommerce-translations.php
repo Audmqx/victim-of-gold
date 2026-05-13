@@ -16,9 +16,10 @@ function vog_woocommerce_translations($translated_text, $text, $domain) {
         return $translated_text;
     }
 
-    // get_locale() est switché par Polylang dès le début de la requête,
-    // plus fiable que vog_current_lang() sur les pages WooCommerce.
-    $lang = substr(get_locale(), 0, 2);
+    // N'appliquer une langue non-FR que si Polylang le confirme explicitement.
+    // Par défaut (Polylang absent, page sans langue, checkout mal configuré) → FR.
+    $pll  = function_exists('pll_current_language') ? pll_current_language('slug') : null;
+    $lang = in_array($pll, ['en', 'ru', 'zh'], true) ? $pll : 'fr';
 
     if ($lang === 'fr') {
         $fr = [
