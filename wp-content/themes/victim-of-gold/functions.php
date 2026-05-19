@@ -84,8 +84,9 @@ function vog_current_lang(): string
 
 /**
  * Persiste la langue Polylang dans le cookie vog_lang.
- * S'exécute sur toutes les pages sauf panier/checkout/compte où pll retourne
- * toujours 'fr' (URL sans préfixe, pages WooCommerce non-traduites).
+ * On saute TOUTES les pages WooCommerce (boutique, produit, panier, checkout,
+ * compte) car leur URL est sans préfixe et pll y retourne toujours 'fr',
+ * quelle que soit la langue réelle de l'utilisateur.
  */
 function vog_set_language_cookie(): void
 {
@@ -93,8 +94,13 @@ function vog_set_language_cookie(): void
         return;
     }
 
-    // Sur ces pages WooCommerce, pll retourne 'fr' quelle que soit la langue réelle.
-    if (function_exists('is_cart') && (is_cart() || is_checkout() || is_account_page())) {
+    // Toutes les pages WooCommerce : URL sans préfixe → pll non fiable.
+    if (
+        (function_exists('is_woocommerce') && is_woocommerce()) || // boutique, produit, catégorie
+        (function_exists('is_cart')         && is_cart())         ||
+        (function_exists('is_checkout')     && is_checkout())     ||
+        (function_exists('is_account_page') && is_account_page())
+    ) {
         return;
     }
 
