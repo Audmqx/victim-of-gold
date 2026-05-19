@@ -68,11 +68,16 @@ foreach ($attachment_ids as $index => $attachment_id) {
 ?>
                 <div class="vog-add-to-cart">
                     <?php
-    // Modifier le texte du bouton
-    add_filter('woocommerce_product_single_add_to_cart_text', function ($text) {
-        return 'Ajouter au panier';
+    add_filter('woocommerce_product_single_add_to_cart_text', function () {
+        $labels = [
+            'en' => 'Add to cart',
+            'ru' => 'В корзину',
+            'zh' => '加入购物车',
+            'fr' => 'Ajouter au panier',
+        ];
+        return $labels[vog_current_lang()] ?? 'Ajouter au panier';
     });
-woocommerce_template_single_add_to_cart();
+    woocommerce_template_single_add_to_cart();
 ?>
                 </div>
 

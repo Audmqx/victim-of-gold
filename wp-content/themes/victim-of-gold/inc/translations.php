@@ -52,6 +52,13 @@ function vog_get_translations(): array
         ],
 
         'ru' => [
+            // WooCommerce
+            'wc.add_to_cart'    => 'В корзину',
+            'wc.view_cart'      => 'Просмотр корзины',
+            'wc.checkout'       => 'Оформить заказ',
+            'wc.added_single'   => '%s добавлен в корзину.',
+            'wc.added_multiple' => 'Товары добавлены в корзину.',
+
             // Front page
             'home.about'          => 'Victim of Gold — концепт-стор, объединяющий чистое золото 24 карат и уникальное в мире мастерство: Ателье, Бутик и Кафе, где можно открыть для себя и прочувствовать настоящий золотой опыт.',
             'home.read_more'      => 'Читать',
@@ -85,6 +92,13 @@ function vog_get_translations(): array
         ],
 
         'zh' => [
+            // WooCommerce
+            'wc.add_to_cart'    => '加入购物车',
+            'wc.view_cart'      => '查看购物车',
+            'wc.checkout'       => '结账',
+            'wc.added_single'   => '%s 已加入购物车。',
+            'wc.added_multiple' => '商品已加入购物车。',
+
             // Front page
             'home.about'          => 'Victim of Gold 是一家融合纯24K金与世界独一无二工艺的概念店：工坊、精品店与咖啡馆，带您探索并体验一段黄金之旅。',
             'home.read_more'      => '阅读',

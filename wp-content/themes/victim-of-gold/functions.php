@@ -26,22 +26,97 @@ function vog_is_any_translation_of(string $fr_slug): bool
 }
 
 /**
+ * Returns true when the current URL has an explicit language prefix (/en/, /ru/, /zh/, /fr/).
+ * Works at any point in the WordPress lifecycle (URL is available from the start).
+ * French home is at / (no prefix), so / returns false.
+ */
+function vog_url_has_lang_prefix(): bool
+{
+    $path = $_SERVER['REQUEST_URI'] ?? '/';
+    return (bool) preg_match('#^/(en|ru|zh|fr)(/|$|\?)#', $path);
+}
+
+/**
  * Returns the current 2-letter language code.
- * Works with Polylang (pll_current_language) or falls back to
- * the ?lang= query param, then WPLANG, then 'fr'.
+ *
+ * Prefixed URLs (/en/, /ru/, /zh/) → Polylang détecte depuis l'URL, fiable dès init.
+ * URLs sans préfixe (/boutique/, /checkout/, /, etc.) → on lit le cookie vog_lang.
+ *   Le cookie peut être mis à jour par vog_set_language_cookie() pendant template_redirect,
+ *   donc on ne met en cache qu'après que cet hook ait eu lieu.
  */
 function vog_current_lang(): string
 {
-    if (function_exists('pll_current_language')) {
-        return pll_current_language('slug') ?: 'fr';
+    static $cached = null;
+    if ($cached !== null) {
+        return $cached;
     }
+
+    if (function_exists('pll_current_language')) {
+        if (vog_url_has_lang_prefix()) {
+            // URL avec préfixe : Polylang est autoritaire, on peut cacher immédiatement.
+            $cached = pll_current_language('slug') ?: 'fr';
+            return $cached;
+        }
+
+        // URL sans préfixe : le cookie est la source de vérité.
+        // On ne met pas en cache avant template_redirect car vog_set_language_cookie()
+        // peut encore modifier $_COOKIE['vog_lang'] pendant cet hook.
+        $cookie = isset($_COOKIE['vog_lang']) ? sanitize_key($_COOKIE['vog_lang']) : '';
+        $lang   = in_array($cookie, ['en', 'ru', 'zh', 'fr'], true)
+            ? $cookie
+            : (pll_current_language('slug') ?: 'fr');
+
+        if (did_action('template_redirect')) {
+            $cached = $lang;
+        }
+        return $lang;
+    }
+
     $param = isset($_GET['lang']) ? sanitize_key($_GET['lang']) : '';
     if (in_array($param, ['en', 'ru', 'zh'], true)) {
-        return $param;
+        $cached = $param;
+        return $cached;
     }
     $wplang = defined('WPLANG') ? WPLANG : get_option('WPLANG', 'fr_FR');
-    return substr($wplang, 0, 2) ?: 'fr';
+    $cached = substr($wplang, 0, 2) ?: 'fr';
+    return $cached;
 }
+
+/**
+ * Persiste la langue Polylang dans le cookie vog_lang.
+ * S'exécute sur toutes les pages sauf panier/checkout/compte où pll retourne
+ * toujours 'fr' (URL sans préfixe, pages WooCommerce non-traduites).
+ */
+function vog_set_language_cookie(): void
+{
+    if (!function_exists('pll_current_language')) {
+        return;
+    }
+
+    // Sur ces pages WooCommerce, pll retourne 'fr' quelle que soit la langue réelle.
+    if (function_exists('is_cart') && (is_cart() || is_checkout() || is_account_page())) {
+        return;
+    }
+
+    $lang = pll_current_language('slug');
+    if (!$lang || !in_array($lang, ['en', 'ru', 'zh', 'fr'], true)) {
+        return;
+    }
+
+    if (!empty($_COOKIE['vog_lang']) && $_COOKIE['vog_lang'] === $lang) {
+        return;
+    }
+
+    setcookie('vog_lang', $lang, [
+        'expires'  => time() + 30 * DAY_IN_SECONDS,
+        'path'     => COOKIEPATH ?: '/',
+        'secure'   => is_ssl(),
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ]);
+    $_COOKIE['vog_lang'] = $lang;
+}
+add_action('template_redirect', 'vog_set_language_cookie', 1);
 
 /**
  * Returns the HTML for the language switcher.
@@ -57,14 +132,24 @@ function vog_lang_switcher_html(): string
     $parts   = [];
 
     if (function_exists('pll_the_languages')) {
-        $pll_langs = pll_the_languages(['raw' => 1, 'hide_if_no_translation' => 0]);
+        $pll_langs       = pll_the_languages(['raw' => 1, 'hide_if_no_translation' => 0]);
+        $on_unprefixed   = !vog_url_has_lang_prefix();
         foreach ($pll_langs as $lang) {
             $code  = $lang['slug'];
             $label = $labels[$code] ?? strtoupper($code);
-            $class = $lang['current_lang'] ? 'lang-link lang-link--active' : 'lang-link';
+            $class = ($code === $current) ? 'lang-link lang-link--active' : 'lang-link';
+
+            // Sur les pages sans préfixe (checkout, panier, pages FR…), Polylang
+            // renvoie la même URL pour la langue par défaut (FR → /checkout/).
+            // On force le lien vers la home de chaque langue pour garantir
+            // que le cookie vog_lang sera mis à jour à l'arrivée.
+            $url = ($on_unprefixed && function_exists('pll_home_url'))
+                ? pll_home_url($code)
+                : $lang['url'];
+
             $parts[] = sprintf(
                 '<a href="%s" class="%s" lang="%s" hreflang="%s">%s</a>',
-                esc_url($lang['url']),
+                esc_url($url),
                 esc_attr($class),
                 esc_attr($code),
                 esc_attr($code),

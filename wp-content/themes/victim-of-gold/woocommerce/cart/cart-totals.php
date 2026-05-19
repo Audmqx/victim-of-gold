@@ -74,7 +74,7 @@ defined( 'ABSPATH' ) || exit;
 	</table>
 
 	<div class="cart-checkout-button-wrapper">
-		<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="button checkout-button"><?php esc_html_e('Paiement', 'victim-of-gold'); ?></a>
+		<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="button checkout-button"><?php echo esc_html( vog_t( 'wc.checkout', 'Paiement' ) ); ?></a>
 	</div>
 
 	<?php do_action( 'woocommerce_after_cart_totals' ); ?>
